@@ -18,15 +18,15 @@
     <link rel="stylesheet"
         href="styles.css">
 
+    <link rel="shortcut icon" type="image/png" href="click.png"/>
     <script type="text/javascript"
         src="https://unpkg.com/@voxeet/voxeet-web-sdk"></script>
 </head>
 <body>
-
     <main role="main">
         <div class="container">
+            <img src = "ClickShare.png" width = "200px" height = "70px" style = "padding-top: 20px;">
             <h1 id="title" class="title">Project Name</h1>
-
             <div class="form-group row">
                 <label for="username-input" class="col-sm-3 col-form-label">Name:</label>
                 <div class="col-sm-9">
@@ -34,11 +34,24 @@
                         <input id="external-id-input" type="text" class="form-control" placeholder="External ID" title="External ID" style="display: none;">
                         <input id="username-input" type="text" class="form-control" placeholder="Your name" title="Your name">
                         <input id="avatar-url-input" type="text" class="form-control" placeholder="Avatar URL" title="Avatar URL" style = "display: none;">
-                        <div class="input-group-append">
-                            <button id="connect-btn" class="btn btn-primary" type="button">Connect</button>
-                        </div>
+                        
                     </div>
                 </div>
+            </div>
+            <div class="input-group-append">
+                <input id="conference-alias-input" type="text" class="form-control" placeholder="Conference alias" >
+                <button id="generate-conference-id" class="btn btn-primary" type="button" >Get Meeting ID</button>
+            </div>
+            <div class="input-group-append">
+                <button id="connect-btn" class="btn btn-primary center" type="button">Connect</button>
+                
+            </div>
+            <div class="input-group-append">
+                <button id="conference-leave-btn" class="btn btn-danger center" type="button" disabled>Leave</button>
+            </div>
+            <div class="input-group-append center">
+                <button id="conference-join-btn" class="btn btn-primary btnColor" type="button" disabled style="display:none;">Join</button>
+                <button id="conference-listen-btn" class="btn btn-primary" type="button" disabled style="display:none;">Listen</button>
             </div>
 
             <!-- Join or Leave a Conference -->
@@ -58,16 +71,9 @@
                         <label class="input-group-text" for="chk-dolby-voice" style="border-left: none; padding-left: 0;">Dolby Voice</label>
                     </div>
 
-                    <div class="input-group-append">
-                        <input id="conference-alias-input" type="text" class="form-control" placeholder="Conference alias" >
-                        <button id="generate-conference-id" class="btn btn-primary" type="button" >Generate Meeting ID</button>
-                    </div>
+                    
 
-                    <div class="input-group-append">
-                        <button id="conference-join-btn" class="btn btn-primary btnColor" type="button" disabled style="display:none;">Join</button>
-                        <button id="conference-listen-btn" class="btn btn-primary" type="button" disabled style="display:none;">Listen</button>
-                        <button id="conference-leave-btn" class="btn btn-danger" type="button" disabled>Leave</button>
-                    </div>
+                    
                   </div>
                 </div>
             </div>
@@ -249,7 +255,7 @@
         </div>
 
         <!-- Display logs -->
-        <div class="bg-light">
+        <div class="bg-light" style = "display: none">
             <div class="container">
                 <h2 class="title">Logs</h2>
                 <div class="form-group">
