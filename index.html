@@ -23,7 +23,6 @@
 </head>
 <body>
 
-
     <main role="main">
         <div class="container">
             <h1 id="title" class="title">Project Name</h1>
@@ -60,18 +59,60 @@
                     </div>
 
                     <div class="input-group-append">
+                        <input id="conference-alias-input" type="text" class="form-control" placeholder="Conference alias" >
+                        <button id="generate-conference-id" class="btn btn-primary" type="button" >Generate Meeting ID</button>
+                    </div>
+
+                    <div class="input-group-append">
                         <button id="conference-join-btn" class="btn btn-primary btnColor" type="button" disabled>Join</button>
                         <button id="conference-listen-btn" class="btn btn-primary" type="button" disabled style="display:none;">Listen</button>
-                        <button id="conference-leave-btn" class="btn btn-danger" type="button" disabled style="display:none">Leave</button>
+                        <button id="conference-leave-btn" class="btn btn-danger" type="button" disabled>Leave</button>
                     </div>
-                    <div class="input-group-append">
-                        <button id="conference-show-id" class="btn btn-primary" type="button" onClick="document.getElementById('conference-alias-input').style.display = 'inline'">Get/Change Meeting ID</button>
-                    </div>
-                    <input id="conference-alias-input" type="text" class="form-control" placeholder="Conference alias" style="display:none;" >
                   </div>
                 </div>
             </div>
     
+            <!-- Actions on Video -->
+            <div id="video-toggles" class="form-group row" data-conference="on" style="display:none;">
+                <label class="col-sm-3 col-form-label">Video actions:</label>
+                <div class="col-sm-9">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-append">
+                            <button id="start-video-btn" class="btn btn-success" type="button" disabled>Start video</button>
+                            <button id="stop-video-btn" class="btn btn-secondary" type="button" disabled>Stop video</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions on Audio -->
+            <div id="audio-toggles" class="form-group row" data-conference="on" style="display:none;">
+                <label class="col-sm-3 col-form-label">Audio actions:</label>
+                <div class="col-sm-9">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-append">
+                            <button id="start-audio-btn" class="btn btn-success" type="button" disabled>Start audio</button>
+                            <button id="stop-audio-btn" class="btn btn-secondary" type="button" disabled>Stop audio</button>
+                            <button id="mute-audio-btn" class="btn btn-warning" type="button" disabled>Mute audio</button>
+                            <button id="unmute-audio-btn" class="btn btn-warning" type="button" disabled>Unmute audio</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions on Screen Share -->
+            <div id="screenshare-toggles" class="form-group row" data-conference="on" style="display:none;">
+                <label class="col-sm-3 col-form-label">Screen Share actions:</label>
+                <div class="col-sm-9">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-append">
+                            <button id="start-screenshare-btn" class="btn btn-success" type="button" disabled>Start screen share</button>
+                            <button id="stop-screenshare-btn" class="btn btn-secondary" type="button" disabled>Stop screen share</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Video Devices -->
             <div class="form-group row" style="display:none;">
                 <label for="video-devices" class="col-sm-3 col-form-label">Video Devices:</label>
@@ -110,48 +151,6 @@
                       </div>
                 </div>
             </div>
-
-            <!-- Actions on Video -->
-            <div class="form-group row" data-conference="on" style="display:none;">
-                <label class="col-sm-3 col-form-label">Video actions:</label>
-                <div class="col-sm-9">
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-append">
-                            <button id="start-video-btn" class="btn btn-success" type="button" disabled>Start video</button>
-                            <button id="stop-video-btn" class="btn btn-secondary" type="button" disabled>Stop video</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Actions on Audio -->
-            <div class="form-group row" data-conference="on" style="display:none;">
-                <label class="col-sm-3 col-form-label">Audio actions:</label>
-                <div class="col-sm-9">
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-append">
-                            <button id="start-audio-btn" class="btn btn-success" type="button" disabled>Start audio</button>
-                            <button id="stop-audio-btn" class="btn btn-secondary" type="button" disabled>Stop audio</button>
-                            <button id="mute-audio-btn" class="btn btn-warning" type="button" disabled>Mute audio</button>
-                            <button id="unmute-audio-btn" class="btn btn-warning" type="button" disabled>Unmute audio</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Actions on Screen Share -->
-            <div class="form-group row" data-conference="on" style="display:none;">
-                <label class="col-sm-3 col-form-label">Screen Share actions:</label>
-                <div class="col-sm-9">
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-append">
-                            <button id="start-screenshare-btn" class="btn btn-success" type="button" disabled>Start screen share</button>
-                            <button id="stop-screenshare-btn" class="btn btn-secondary" type="button" disabled>Stop screen share</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
 
             <!-- Play a video -->
             <div class="form-group row" data-conference="on" style="display:none;">
