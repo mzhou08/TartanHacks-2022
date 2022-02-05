@@ -69,6 +69,12 @@ $("#btn-set-webrtc-constraints").click(() => {
   });
 });
 
+$("#generate-conference-id").click(() => {
+  // Generate a random conference alias
+  let conferenceAlias = "conf-" + Math.round(Math.random() * 10000);
+  $("#conference-alias-input").val(conferenceAlias);
+});
+
 $("#connect-btn").click(() => {
   const externalId = $("#external-id-input").val();
   const username = $("#username-input").val();
@@ -187,6 +193,11 @@ $("#connect-btn").click(() => {
                   .catch((err) => logError(err));
               })
               .then(() => {
+        
+                $("#audio-toggles").attr("style", "display:inline;");
+                $("#video-toggles").attr("style", "display:inline;");
+                $("#screenshare-toggles").attr("style", "display:inline;");
+
                 $("#btn-set-webrtc-constraints").attr("disabled", false);
       
                 $("#chk-live-recording").attr("disabled", true);
@@ -989,9 +1000,9 @@ $(function () {
     `https://gravatar.com/avatar/${rand}?s=200&d=identicon`
   );
 
-  // Generate a random conference alias
-  let conferenceAlias = "conf-" + Math.round(Math.random() * 10000);
-  $("#conference-alias-input").val(conferenceAlias);
+//   // Generate a random conference alias
+//   let conferenceAlias = "conf-" + Math.round(Math.random() * 10000);
+//   $("#conference-alias-input").val(conferenceAlias);
 
   // Set the Voxeet SDK Version
   $("#sdk-version").text(VoxeetSDK.version);
