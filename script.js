@@ -71,7 +71,7 @@ $("#btn-set-webrtc-constraints").click(() => {
 
 $("#generate-conference-id").click(() => {
   // Generate a random conference alias
-  let conferenceAlias = "conf-" + Math.round(Math.random() * 10000);
+  let conferenceAlias = Math.round(Math.random() * 10000);
   $("#conference-alias-input").val(conferenceAlias);
 });
 
