@@ -664,7 +664,7 @@ let hideActions = () => {
 $("#conference-leave-btn").click(function () {
   // Leave the conference
   hideActions();
-  $("#title").text(`Project Name`);
+  $("#title").text(``);
   VoxeetSDK.conference
     .leave()
     .then(() => {
