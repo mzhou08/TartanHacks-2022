@@ -1,11 +1,29 @@
 import './style.css';
 
 import firebase from 'firebase/app';
-import 'firebase/firestore';
+import 'firebase/firestore'; 
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  // your config
+  apiKey: "AIzaSyAQNFe67UuFZXntvXMHLSTMsd5qwly65c0",
+  authDomain: "tartan-hacks-2022.firebaseapp.com",
+  projectId: "tartan-hacks-2022",
+  storageBucket: "tartan-hacks-2022.appspot.com",
+  messagingSenderId: "935571729759",
+  appId: "1:935571729759:web:e115b9140cb6e1093b9aea",
+  measurementId: "G-WPXRDF6PK1"
 };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
