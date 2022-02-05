@@ -34,3 +34,9 @@ footer {
   height: 25px;
   width: 25px;
 }
+
+.center {
+  margin: 0 auto;
+  margin-top: 10px;
+  display: block;
+}
