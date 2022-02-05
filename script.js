@@ -501,6 +501,7 @@ $("#conference-listen-btn").click(function () {
 
 $("#conference-leave-btn").click(function () {
   // Leave the conference
+  $("#title").text(`Project Name`);
   VoxeetSDK.conference
     .leave()
     .then(() => {
