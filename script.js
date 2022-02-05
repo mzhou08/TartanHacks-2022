@@ -187,6 +187,11 @@ $("#connect-btn").click(() => {
                   .catch((err) => logError(err));
               })
               .then(() => {
+        
+                $("#audio-toggles").attr("style", "display:inline;");
+                $("#video-toggles").attr("style", "display:inline;");
+                $("#screenshare-toggles").attr("style", "display:inline;");
+
                 $("#btn-set-webrtc-constraints").attr("disabled", false);
       
                 $("#chk-live-recording").attr("disabled", true);
@@ -374,10 +379,6 @@ $("#conference-join-btn").click(() => {
 
           $("#send-message-btn").attr("disabled", false);
           $("#send-invitation-btn").attr("disabled", false);
-
-          $("#audio-toggles").css("display", "inline");
-          $("#video-toggles").style.display="inline";
-          $("#screenshare-toggles").style.display="inline";
 
           setRecordingState(VoxeetSDK.recording.current != null);
         });
