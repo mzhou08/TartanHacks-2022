@@ -6,7 +6,7 @@ const consumerKey = "edHn5MwzvjlWIKDWkz1q2Q==";
 const consumerSecret = "FTvk0yT2X8tBgrhXYg2Y-pLdGki_mpEYEfKhv_OaNq0=";
 const ExtensionID = "cmdnlfcchjpgpkepdjjdanecaiejnolb";
 var firstClick = true;
-
+var roomNumber = "";
 const logMessage = (message) => {
   console.log(`${new Date().toISOString()} - ${message}`);
   $("#logs-area").val(
@@ -86,331 +86,514 @@ $("#generate-conference-id").click(() => {
 $("#connect-btn").click(() => {
   document.getElementById("video-streams").style.display = "block";
   document.getElementById("conference-leave-btn").style.display = "block";
-  if (firstClick) {
-    firstClick = false;
-    let conferenceAlias = Math.round(Math.random() * 10000);
-    $("#conference-alias-input").val(conferenceAlias);
-    const externalId = $("#external-id-input").val();
-    const username = $("#username-input").val();
-    const avatarUrl = $("#avatar-url-input").val();
+  //   if (firstClick) {
+  let conferenceAlias = Math.round(Math.random() * 10000);
+  $("#conference-alias-input").val(conferenceAlias);
+  const externalId = $("#external-id-input").val();
+  const username = $("#username-input").val();
+  const avatarUrl = $("#avatar-url-input").val();
 
-    // Open a session to the Dolby.io APIs
-    VoxeetSDK.session
-      .open({ name: username, externalId: externalId, avatarUrl: avatarUrl })
-      .then(() => {
-        // Update the login message with the name of the user
-        $("#title").text(`You are in room ${conferenceAlias}`);
-        $("#conference-join-btn").attr("disabled", false);
-        $("#conference-listen-btn").attr("disabled", false);
-        $("#connect-btn").attr("disabled", true);
-        $("#external-id-input").attr("readonly", true);
-        $("#username-input").attr("readonly", true);
-        $("#avatar-url-input").attr("readonly", true);
-      })
-      // .then(() => window.location.replace("room.html"))
-      .then(() => logMessage(`You are connected as ${username}`))
-      .then(() => {
-        const liveRecording = $("#chk-live-recording")[0].checked;
-        const dolbyVoice = $("#chk-dolby-voice")[0].checked;
+  // Open a session to the Dolby.io APIs
+  VoxeetSDK.session
+    .open({ name: username, externalId: externalId, avatarUrl: avatarUrl })
+    .then(() => {
+      // Update the login message with the name of the user
+      $("#title").text(`You are in room ${conferenceAlias}`);
+      $("#conference-join-btn").attr("disabled", false);
+      $("#conference-listen-btn").attr("disabled", false);
+      $("#connect-btn").attr("disabled", true);
+      $("#external-id-input").attr("readonly", true);
+      $("#username-input").attr("readonly", true);
+      $("#avatar-url-input").attr("readonly", true);
+    })
+    // .then(() => window.location.replace("room.html"))
+    .then(() => logMessage(`You are connected as ${username}`))
+    .then(() => {
+      const liveRecording = $("#chk-live-recording")[0].checked;
+      const dolbyVoice = $("#chk-dolby-voice")[0].checked;
 
-        // Default conference parameters
-        // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-conferenceparameters
-        let conferenceParams = {
-          liveRecording: liveRecording,
-          rtcpMode: "average", // worst, average, max
-          ttl: 0,
-          videoCodec: "H264", // H264, VP8
-          dolbyVoice: dolbyVoice,
-        };
+      // Default conference parameters
+      // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-conferenceparameters
+      let conferenceParams = {
+        liveRecording: liveRecording,
+        rtcpMode: "average", // worst, average, max
+        ttl: 0,
+        videoCodec: "H264", // H264, VP8
+        dolbyVoice: dolbyVoice,
+      };
 
-        // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-conferenceoptions
-        let conferenceOptions = {
-          alias: $("#conference-alias-input").val(),
-          params: conferenceParams,
-        };
+      // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-conferenceoptions
+      let conferenceOptions = {
+        alias: $("#conference-alias-input").val(),
+        params: conferenceParams,
+      };
 
-        // 1. Create a conference room with an alias
-        VoxeetSDK.conference
-          .create(conferenceOptions)
-          .then((conference) => {
-            logMessage(
-              `Conference id: ${conference.id} & Conference alias ${conference.alias}`
-            );
-            conferenceId = conference.id;
+      // 1. Create a conference room with an alias
+      VoxeetSDK.conference
+        .create(conferenceOptions)
+        .then((conference) => {
+          logMessage(
+            `Conference id: ${conference.id} & Conference alias ${conference.alias}`
+          );
+          conferenceId = conference.id;
 
-            // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-joinoptions
-            const joinOptions = getConstraints();
-            joinOptions.simulcast = false;
-            if (conferenceAccessToken) {
-              joinOptions.conferenceAccessToken = conferenceAccessToken;
-            }
+          // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-joinoptions
+          const joinOptions = getConstraints();
+          joinOptions.simulcast = false;
+          if (conferenceAccessToken) {
+            joinOptions.conferenceAccessToken = conferenceAccessToken;
+          }
 
-            logMessage("Join the conference with the options:");
-            logMessage(JSON.stringify(joinOptions));
+          logMessage("Join the conference with the options:");
+          logMessage(JSON.stringify(joinOptions));
 
-            // 2. Join the conference
-            return VoxeetSDK.conference
-              .join(conference, joinOptions)
-              .then(() => {
-                // Load the Output Audio devices
-                VoxeetSDK.mediaDevice
-                  .enumerateAudioDevices("output")
-                  .then((devices) => {
-                    console.log("Output Audio Devices");
-                    console.log(devices);
-                    $("#output-audio-devices").empty();
+          // 2. Join the conference
+          return VoxeetSDK.conference
+            .join(conference, joinOptions)
+            .then(() => {
+              // Load the Output Audio devices
+              VoxeetSDK.mediaDevice
+                .enumerateAudioDevices("output")
+                .then((devices) => {
+                  console.log("Output Audio Devices");
+                  console.log(devices);
+                  $("#output-audio-devices").empty();
 
-                    devices.forEach((device) => {
-                      $("#output-audio-devices").append(
-                        new Option(device.label, device.deviceId)
-                      );
-                    });
+                  devices.forEach((device) => {
+                    $("#output-audio-devices").append(
+                      new Option(device.label, device.deviceId)
+                    );
+                  });
 
-                    $("#btn-set-output-audio-device").attr("disabled", false);
-                  })
-                  .catch((err) => logError(err));
+                  $("#btn-set-output-audio-device").attr("disabled", false);
+                })
+                .catch((err) => logError(err));
 
-                // Load the Input Audio devices
-                VoxeetSDK.mediaDevice
-                  .enumerateAudioDevices("input")
-                  .then((devices) => {
-                    console.log("Input Audio Devices");
-                    console.log(devices);
-                    $("#input-audio-devices").empty();
+              // Load the Input Audio devices
+              VoxeetSDK.mediaDevice
+                .enumerateAudioDevices("input")
+                .then((devices) => {
+                  console.log("Input Audio Devices");
+                  console.log(devices);
+                  $("#input-audio-devices").empty();
 
-                    devices.forEach((device) => {
-                      $("#input-audio-devices").append(
-                        new Option(device.label, device.deviceId)
-                      );
-                    });
+                  devices.forEach((device) => {
+                    $("#input-audio-devices").append(
+                      new Option(device.label, device.deviceId)
+                    );
+                  });
 
-                    $("#btn-set-input-audio-device").attr("disabled", false);
-                  })
-                  .catch((err) => logError(err));
+                  $("#btn-set-input-audio-device").attr("disabled", false);
+                })
+                .catch((err) => logError(err));
 
-                // Load the Video devices
-                VoxeetSDK.mediaDevice
-                  .enumerateVideoDevices("input")
-                  .then((devices) => {
-                    console.log("Video Devices");
-                    console.log(devices);
-                    $("#video-devices").empty();
+              // Load the Video devices
+              VoxeetSDK.mediaDevice
+                .enumerateVideoDevices("input")
+                .then((devices) => {
+                  console.log("Video Devices");
+                  console.log(devices);
+                  $("#video-devices").empty();
 
-                    devices.forEach((device) => {
-                      $("#video-devices").append(
-                        new Option(device.label, device.deviceId)
-                      );
-                    });
+                  devices.forEach((device) => {
+                    $("#video-devices").append(
+                      new Option(device.label, device.deviceId)
+                    );
+                  });
 
-                    $("#btn-set-video-device").attr("disabled", false);
-                  })
-                  .catch((err) => logError(err));
-              })
-              .then(() => {
-                $("#audio-toggles").attr("style", "display:inline;");
-                $("#video-toggles").attr("style", "display:inline;");
-                $("#screenshare-toggles").attr("style", "display:inline;");
+                  $("#btn-set-video-device").attr("disabled", false);
+                })
+                .catch((err) => logError(err));
+            })
+            .then(() => {
+              $("#audio-toggles").attr("style", "display:inline;");
+              $("#video-toggles").attr("style", "display:inline;");
+              $("#screenshare-toggles").attr("style", "display:inline;");
 
-                $("#generate-conference-id").attr("disabled", true);
+              $("#generate-conference-id").attr("disabled", true);
 
-                $("#btn-set-webrtc-constraints").attr("disabled", false);
+              $("#btn-set-webrtc-constraints").attr("disabled", false);
 
-                $("#chk-live-recording").attr("disabled", true);
-                $("#conference-join-btn").attr("disabled", true);
-                $("#conference-listen-btn").attr("disabled", true);
-                $("#conference-leave-btn").attr("disabled", false);
-                $("#conference-alias-input").attr("readonly", true);
+              $("#chk-live-recording").attr("disabled", true);
+              $("#conference-join-btn").attr("disabled", true);
+              $("#conference-listen-btn").attr("disabled", true);
+              $("#conference-leave-btn").attr("disabled", false);
+              $("#conference-alias-input").attr("readonly", true);
 
-                $("#start-video-btn").attr("disabled", true);
-                $("#stop-video-btn").attr("disabled", false);
+              $("#start-video-btn").attr("disabled", true);
+              $("#stop-video-btn").attr("disabled", false);
 
-                $("#start-audio-btn").attr("disabled", true);
-                $("#stop-audio-btn").attr("disabled", false);
-                $("#mute-audio-btn").attr("disabled", false);
-                $("#unmute-audio-btn").attr("disabled", true);
+              $("#start-audio-btn").attr("disabled", true);
+              $("#stop-audio-btn").attr("disabled", false);
+              $("#mute-audio-btn").attr("disabled", false);
+              $("#unmute-audio-btn").attr("disabled", true);
 
-                $("#start-screenshare-btn").attr("disabled", false);
-                $("#stop-screenshare-btn").attr("disabled", true);
+              $("#start-screenshare-btn").attr("disabled", false);
+              $("#stop-screenshare-btn").attr("disabled", true);
 
-                $("#video-url-input").attr("readonly", false);
-                $("#video-start-btn").attr("disabled", false);
-                $("#video-stop-btn").attr("disabled", true);
-                $("#video-pause-btn").attr("disabled", true);
-                $("#video-play-btn").attr("disabled", true);
+              $("#video-url-input").attr("readonly", false);
+              $("#video-start-btn").attr("disabled", false);
+              $("#video-stop-btn").attr("disabled", true);
+              $("#video-pause-btn").attr("disabled", true);
+              $("#video-play-btn").attr("disabled", true);
 
-                $("#start-recording-btn").attr("disabled", false);
-                $("#stop-recording-btn").attr("disabled", true);
-                $("#recording-status")
-                  .removeClass("fa-circle")
-                  .addClass("fa-stop-circle")
-                  .removeClass("red")
-                  .addClass("gray");
+              $("#start-recording-btn").attr("disabled", false);
+              $("#stop-recording-btn").attr("disabled", true);
+              $("#recording-status")
+                .removeClass("fa-circle")
+                .addClass("fa-stop-circle")
+                .removeClass("red")
+                .addClass("gray");
 
-                $("#rtmp-status").removeClass("red").addClass("gray");
-                $("#rtmp-url-input").attr("readonly", false);
-                $("#start-rtmp-btn").attr("disabled", false);
-                $("#stop-rtmp-btn").attr("disabled", true);
+              $("#rtmp-status").removeClass("red").addClass("gray");
+              $("#rtmp-url-input").attr("readonly", false);
+              $("#start-rtmp-btn").attr("disabled", false);
+              $("#stop-rtmp-btn").attr("disabled", true);
 
-                $("#send-message-btn").attr("disabled", false);
-                $("#send-invitation-btn").attr("disabled", false);
+              $("#send-message-btn").attr("disabled", false);
+              $("#send-invitation-btn").attr("disabled", false);
 
-                setRecordingState(VoxeetSDK.recording.current != null);
+              setRecordingState(VoxeetSDK.recording.current != null);
+            });
+        })
+        .catch((err) => logError(err));
+    })
+    .catch((e) => logError(e));
+  //   } else {
+  //     const liveRecording = $("#chk-live-recording")[0].checked;
+  //     const dolbyVoice = $("#chk-dolby-voice")[0].checked;
+
+  //     // Default conference parameters
+  //     // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-conferenceparameters
+  //     let conferenceParams = {
+  //       liveRecording: liveRecording,
+  //       rtcpMode: "average", // worst, average, max
+  //       ttl: 0,
+  //       videoCodec: "H264", // H264, VP8
+  //       dolbyVoice: dolbyVoice,
+  //     };
+
+  //     // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-conferenceoptions
+  //     let conferenceOptions = {
+  //       alias: $("#conference-alias-input").val(),
+  //       params: conferenceParams,
+  //     };
+
+  //     // 1. Create a conference room with an alias
+  //     VoxeetSDK.conference
+  //       .create(conferenceOptions)
+  //       .then((conference) => {
+  //         logMessage(
+  //           `Conference id: ${conference.id} & Conference alias ${conference.alias}`
+  //         );
+  //         conferenceId = conference.id;
+
+  //         // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-joinoptions
+  //         const joinOptions = getConstraints();
+  //         joinOptions.simulcast = false;
+  //         if (conferenceAccessToken) {
+  //           joinOptions.conferenceAccessToken = conferenceAccessToken;
+  //         }
+
+  //         logMessage("Join the conference with the options:");
+  //         logMessage(JSON.stringify(joinOptions));
+
+  //         // 2. Join the conference
+  //         return VoxeetSDK.conference
+  //           .join(conference, joinOptions)
+  //           .then(() => {
+  //             // Load the Output Audio devices
+  //             VoxeetSDK.mediaDevice
+  //               .enumerateAudioDevices("output")
+  //               .then((devices) => {
+  //                 console.log("Output Audio Devices");
+  //                 console.log(devices);
+  //                 $("#output-audio-devices").empty();
+
+  //                 devices.forEach((device) => {
+  //                   $("#output-audio-devices").append(
+  //                     new Option(device.label, device.deviceId)
+  //                   );
+  //                 });
+
+  //                 $("#btn-set-output-audio-device").attr("disabled", false);
+  //               })
+  //               .catch((err) => logError(err));
+
+  //             // Load the Input Audio devices
+  //             VoxeetSDK.mediaDevice
+  //               .enumerateAudioDevices("input")
+  //               .then((devices) => {
+  //                 console.log("Input Audio Devices");
+  //                 console.log(devices);
+  //                 $("#input-audio-devices").empty();
+
+  //                 devices.forEach((device) => {
+  //                   $("#input-audio-devices").append(
+  //                     new Option(device.label, device.deviceId)
+  //                   );
+  //                 });
+
+  //                 $("#btn-set-input-audio-device").attr("disabled", false);
+  //               })
+  //               .catch((err) => logError(err));
+
+  //             // Load the Video devices
+  //             VoxeetSDK.mediaDevice
+  //               .enumerateVideoDevices("input")
+  //               .then((devices) => {
+  //                 console.log("Video Devices");
+  //                 console.log(devices);
+  //                 $("#video-devices").empty();
+
+  //                 devices.forEach((device) => {
+  //                   $("#video-devices").append(
+  //                     new Option(device.label, device.deviceId)
+  //                   );
+  //                 });
+
+  //                 $("#btn-set-video-device").attr("disabled", false);
+  //               })
+  //               .catch((err) => logError(err));
+  //           })
+  //           .then(() => {
+  //             $("#audio-toggles").attr("style", "display:inline;");
+  //             $("#video-toggles").attr("style", "display:inline;");
+  //             $("#screenshare-toggles").attr("style", "display:inline;");
+
+  //             $("#generate-conference-id").attr("disabled", true);
+
+  //             $("#btn-set-webrtc-constraints").attr("disabled", false);
+
+  //             $("#chk-live-recording").attr("disabled", true);
+  //             $("#conference-join-btn").attr("disabled", true);
+  //             $("#conference-listen-btn").attr("disabled", true);
+  //             $("#conference-leave-btn").attr("disabled", false);
+  //             $("#conference-alias-input").attr("readonly", true);
+  //             $("#connect-btn").attr("disabled", true);
+
+  //             $("#start-video-btn").attr("disabled", true);
+  //             $("#stop-video-btn").attr("disabled", false);
+
+  //             $("#start-audio-btn").attr("disabled", true);
+  //             $("#stop-audio-btn").attr("disabled", false);
+  //             $("#mute-audio-btn").attr("disabled", false);
+  //             $("#unmute-audio-btn").attr("disabled", true);
+
+  //             $("#start-screenshare-btn").attr("disabled", false);
+  //             $("#stop-screenshare-btn").attr("disabled", true);
+
+  //             $("#video-url-input").attr("readonly", false);
+  //             $("#video-start-btn").attr("disabled", false);
+  //             $("#video-stop-btn").attr("disabled", true);
+  //             $("#video-pause-btn").attr("disabled", true);
+  //             $("#video-play-btn").attr("disabled", true);
+
+  //             $("#start-recording-btn").attr("disabled", false);
+  //             $("#stop-recording-btn").attr("disabled", true);
+  //             $("#recording-status")
+  //               .removeClass("fa-circle")
+  //               .addClass("fa-stop-circle")
+  //               .removeClass("red")
+  //               .addClass("gray");
+
+  //             $("#rtmp-status").removeClass("red").addClass("gray");
+  //             $("#rtmp-url-input").attr("readonly", false);
+  //             $("#start-rtmp-btn").attr("disabled", false);
+  //             $("#stop-rtmp-btn").attr("disabled", true);
+
+  //             $("#send-message-btn").attr("disabled", false);
+  //             $("#send-invitation-btn").attr("disabled", false);
+
+  //             setRecordingState(VoxeetSDK.recording.current != null);
+  //           });
+  //       })
+  //       .catch((err) => logError(err));
+  //   }
+});
+
+function connectClick() {
+  const externalId = $("#external-id-input").val();
+  const username = $("#username-input").val();
+  const avatarUrl = $("#avatar-url-input").val();
+
+  // Open a session to the Dolby.io APIs
+  VoxeetSDK.session
+    .open({ name: username, externalId: externalId, avatarUrl: avatarUrl })
+    .then(() => {
+      // Update the login message with the name of the user
+
+      $("#conference-join-btn").attr("disabled", false);
+      $("#conference-listen-btn").attr("disabled", false);
+      $("#connect-btn").attr("disabled", true);
+      $("#external-id-input").attr("readonly", true);
+      $("#username-input").attr("readonly", true);
+      $("#avatar-url-input").attr("readonly", true);
+    });
+}
+
+function joinClick() {
+  const liveRecording = $("#chk-live-recording")[0].checked;
+  const dolbyVoice = $("#chk-dolby-voice")[0].checked;
+
+  // Default conference parameters
+  // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-conferenceparameters
+  let conferenceParams = {
+    liveRecording: liveRecording,
+    rtcpMode: "average", // worst, average, max
+    ttl: 0,
+    videoCodec: "H264", // H264, VP8
+    dolbyVoice: dolbyVoice,
+  };
+
+  // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-conferenceoptions
+  let conferenceOptions = {
+    alias: $("#conference-alias-input").val(),
+    params: conferenceParams,
+  };
+
+  // 1. Create a conference room with an alias
+  VoxeetSDK.conference
+    .create(conferenceOptions)
+    .then((conference) => {
+      logMessage(
+        `Conference id: ${conference.id} & Conference alias ${conference.alias}`
+      );
+      conferenceId = conference.id;
+
+      // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-joinoptions
+      const joinOptions = getConstraints();
+      joinOptions.simulcast = false;
+      if (conferenceAccessToken) {
+        joinOptions.conferenceAccessToken = conferenceAccessToken;
+      }
+
+      logMessage("Join the conference with the options:");
+      logMessage(JSON.stringify(joinOptions));
+      // 2. Join the conference
+      return VoxeetSDK.conference
+        .join(conference, joinOptions)
+        .then(() => {
+          // Load the Output Audio devices
+          VoxeetSDK.mediaDevice
+            .enumerateAudioDevices("output")
+            .then((devices) => {
+              console.log("Output Audio Devices");
+              console.log(devices);
+              $("#output-audio-devices").empty();
+
+              devices.forEach((device) => {
+                $("#output-audio-devices").append(
+                  new Option(device.label, device.deviceId)
+                );
               });
-          })
-          .catch((err) => logError(err));
-      })
-      .catch((e) => logError(e));
-  } else {
-    const liveRecording = $("#chk-live-recording")[0].checked;
-    const dolbyVoice = $("#chk-dolby-voice")[0].checked;
 
-    // Default conference parameters
-    // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-conferenceparameters
-    let conferenceParams = {
-      liveRecording: liveRecording,
-      rtcpMode: "average", // worst, average, max
-      ttl: 0,
-      videoCodec: "H264", // H264, VP8
-      dolbyVoice: dolbyVoice,
-    };
+              $("#btn-set-output-audio-device").attr("disabled", false);
+            })
+            .catch((err) => logError(err));
 
-    // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-conferenceoptions
-    let conferenceOptions = {
-      alias: $("#conference-alias-input").val(),
-      params: conferenceParams,
-    };
+          // Load the Input Audio devices
+          VoxeetSDK.mediaDevice
+            .enumerateAudioDevices("input")
+            .then((devices) => {
+              console.log("Input Audio Devices");
+              console.log(devices);
+              $("#input-audio-devices").empty();
 
-    // 1. Create a conference room with an alias
-    VoxeetSDK.conference
-      .create(conferenceOptions)
-      .then((conference) => {
-        logMessage(
-          `Conference id: ${conference.id} & Conference alias ${conference.alias}`
-        );
-        conferenceId = conference.id;
+              devices.forEach((device) => {
+                $("#input-audio-devices").append(
+                  new Option(device.label, device.deviceId)
+                );
+              });
 
-        // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-joinoptions
-        const joinOptions = getConstraints();
-        joinOptions.simulcast = false;
-        if (conferenceAccessToken) {
-          joinOptions.conferenceAccessToken = conferenceAccessToken;
-        }
+              $("#btn-set-input-audio-device").attr("disabled", false);
+            })
+            .catch((err) => logError(err));
 
-        logMessage("Join the conference with the options:");
-        logMessage(JSON.stringify(joinOptions));
+          // Load the Video devices
+          VoxeetSDK.mediaDevice
+            .enumerateVideoDevices("input")
+            .then((devices) => {
+              console.log("Video Devices");
+              console.log(devices);
+              $("#video-devices").empty();
 
-        // 2. Join the conference
-        return VoxeetSDK.conference
-          .join(conference, joinOptions)
-          .then(() => {
-            // Load the Output Audio devices
-            VoxeetSDK.mediaDevice
-              .enumerateAudioDevices("output")
-              .then((devices) => {
-                console.log("Output Audio Devices");
-                console.log(devices);
-                $("#output-audio-devices").empty();
+              devices.forEach((device) => {
+                $("#video-devices").append(
+                  new Option(device.label, device.deviceId)
+                );
+              });
 
-                devices.forEach((device) => {
-                  $("#output-audio-devices").append(
-                    new Option(device.label, device.deviceId)
-                  );
-                });
+              $("#btn-set-video-device").attr("disabled", false);
+            })
+            .catch((err) => logError(err));
+        })
+        .then(() => {
+          $("#audio-toggles").attr("style", "display:inline;");
+          $("#video-toggles").attr("style", "display:inline;");
+          $("#screenshare-toggles").attr("style", "display:inline;");
 
-                $("#btn-set-output-audio-device").attr("disabled", false);
-              })
-              .catch((err) => logError(err));
+          $("#generate-conference-id").attr("disabled", true);
 
-            // Load the Input Audio devices
-            VoxeetSDK.mediaDevice
-              .enumerateAudioDevices("input")
-              .then((devices) => {
-                console.log("Input Audio Devices");
-                console.log(devices);
-                $("#input-audio-devices").empty();
+          $("#btn-set-webrtc-constraints").attr("disabled", false);
 
-                devices.forEach((device) => {
-                  $("#input-audio-devices").append(
-                    new Option(device.label, device.deviceId)
-                  );
-                });
+          $("#chk-live-recording").attr("disabled", true);
+          $("#conference-join-btn").attr("disabled", true);
+          $("#conference-listen-btn").attr("disabled", true);
+          $("#conference-leave-btn").attr("disabled", false);
+          $("#conference-alias-input").attr("readonly", true);
+          $("#connect-btn").attr("disabled", true);
 
-                $("#btn-set-input-audio-device").attr("disabled", false);
-              })
-              .catch((err) => logError(err));
+          $("#start-video-btn").attr("disabled", true);
+          $("#stop-video-btn").attr("disabled", false);
 
-            // Load the Video devices
-            VoxeetSDK.mediaDevice
-              .enumerateVideoDevices("input")
-              .then((devices) => {
-                console.log("Video Devices");
-                console.log(devices);
-                $("#video-devices").empty();
+          $("#start-audio-btn").attr("disabled", true);
+          $("#stop-audio-btn").attr("disabled", false);
+          $("#mute-audio-btn").attr("disabled", false);
+          $("#unmute-audio-btn").attr("disabled", true);
 
-                devices.forEach((device) => {
-                  $("#video-devices").append(
-                    new Option(device.label, device.deviceId)
-                  );
-                });
+          $("#start-screenshare-btn").attr("disabled", false);
+          $("#stop-screenshare-btn").attr("disabled", true);
 
-                $("#btn-set-video-device").attr("disabled", false);
-              })
-              .catch((err) => logError(err));
-          })
-          .then(() => {
-            $("#audio-toggles").attr("style", "display:inline;");
-            $("#video-toggles").attr("style", "display:inline;");
-            $("#screenshare-toggles").attr("style", "display:inline;");
+          $("#video-url-input").attr("readonly", false);
+          $("#video-start-btn").attr("disabled", false);
+          $("#video-stop-btn").attr("disabled", true);
+          $("#video-pause-btn").attr("disabled", true);
+          $("#video-play-btn").attr("disabled", true);
 
-            $("#generate-conference-id").attr("disabled", true);
+          $("#start-recording-btn").attr("disabled", false);
+          $("#stop-recording-btn").attr("disabled", true);
+          $("#recording-status")
+            .removeClass("fa-circle")
+            .addClass("fa-stop-circle")
+            .removeClass("red")
+            .addClass("gray");
 
-            $("#btn-set-webrtc-constraints").attr("disabled", false);
+          $("#rtmp-status").removeClass("red").addClass("gray");
+          $("#rtmp-url-input").attr("readonly", false);
+          $("#start-rtmp-btn").attr("disabled", false);
+          $("#stop-rtmp-btn").attr("disabled", true);
 
-            $("#chk-live-recording").attr("disabled", true);
-            $("#conference-join-btn").attr("disabled", true);
-            $("#conference-listen-btn").attr("disabled", true);
-            $("#conference-leave-btn").attr("disabled", false);
-            $("#conference-alias-input").attr("readonly", true);
-            $("#connect-btn").attr("disabled", true);
+          $("#send-message-btn").attr("disabled", false);
+          $("#send-invitation-btn").attr("disabled", false);
 
-            $("#start-video-btn").attr("disabled", true);
-            $("#stop-video-btn").attr("disabled", false);
+          setRecordingState(VoxeetSDK.recording.current != null);
+        });
+    })
+    .catch((err) => logError(err));
+}
 
-            $("#start-audio-btn").attr("disabled", true);
-            $("#stop-audio-btn").attr("disabled", false);
-            $("#mute-audio-btn").attr("disabled", false);
-            $("#unmute-audio-btn").attr("disabled", true);
+$("#newjoin-btn").click(connectClick);
 
-            $("#start-screenshare-btn").attr("disabled", false);
-            $("#stop-screenshare-btn").attr("disabled", true);
+$("#joinsmeeting-btn").click(() => {
+  $("#title").text(`You are in room ` + $("#conference-alias-input").val());
+  document.getElementById("conference-leave-btn").style.display = "block";
 
-            $("#video-url-input").attr("readonly", false);
-            $("#video-start-btn").attr("disabled", false);
-            $("#video-stop-btn").attr("disabled", true);
-            $("#video-pause-btn").attr("disabled", true);
-            $("#video-play-btn").attr("disabled", true);
+  joinClick();
+});
 
-            $("#start-recording-btn").attr("disabled", false);
-            $("#stop-recording-btn").attr("disabled", true);
-            $("#recording-status")
-              .removeClass("fa-circle")
-              .addClass("fa-stop-circle")
-              .removeClass("red")
-              .addClass("gray");
-
-            $("#rtmp-status").removeClass("red").addClass("gray");
-            $("#rtmp-url-input").attr("readonly", false);
-            $("#start-rtmp-btn").attr("disabled", false);
-            $("#stop-rtmp-btn").attr("disabled", true);
-
-            $("#send-message-btn").attr("disabled", false);
-            $("#send-invitation-btn").attr("disabled", false);
-
-            setRecordingState(VoxeetSDK.recording.current != null);
-          });
-      })
-      .catch((err) => logError(err));
-  }
+$("#form").submit(function (e) {
+  e.preventDefault();
 });
 
 $("#conference-join-btn").click(() => {
