@@ -506,7 +506,7 @@ $("#conference-leave-btn").click(function () {
       conferenceAccessToken = null;
 
       $("#chk-live-recording").attr("disabled", false);
-      $("generate-conference-id").attr("enabled");
+      $("#generate-conference-id").attr("disabled", false);
       $("#btn-set-output-audio-device").attr("disabled", true);
       $("#btn-set-input-audio-device").attr("disabled", true);
       $("#btn-set-video-device").attr("disabled", true);
