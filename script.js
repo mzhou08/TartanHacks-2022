@@ -1190,3 +1190,11 @@ $(function () {
   // Set the Voxeet SDK Version
   $("#sdk-version").text(VoxeetSDK.version);
 });
+
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}

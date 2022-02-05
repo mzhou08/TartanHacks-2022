@@ -44,6 +44,7 @@
                 <button id="connect-btn" class="btn btn-primary center" type="button">Host Meeting</button>
                 
             </div>
+
             <div class="form-group row" style="display : none;">
                 <label for="username-input" class="col-sm-3 col-form-label" style="font-family: monospace;">Enter Meeting ID:</label>
                 <div class="col-sm-2" style = "position: relative; right: 110px;">
@@ -53,11 +54,38 @@
                     </div>
                 </div>
             </div>
-            <button id="conference-join-btn" class="btn btn-primary center" type="button">Join Meeting</button>
+            <!-- <button id="conference-join-btn" class="btn btn-primary center" type="button">Join Meeting</button> -->
             <!-- <div class="input-group-append">
                 <label for="username-input" class="col-sm-3 col-form-label">Enter Meeting ID:</label>
                 <input id="conference-alias-input" type="text" class="form-control" placeholder="Conference alias" style="width: 200px">
             </div> -->
+            <!-- This is a pop up form -->
+
+
+<button class="btn btn-primary center" onclick="openForm()">Join Meeting</button>
+
+<div class="form-popup" id="myForm">
+  <form class="form-container">
+
+    <label for="email"><b>Enter Meeting ID</b></label>
+    <input id="conference-alias-input" type="text" class="form-control" placeholder="Conference alias" style="width: 200px">
+
+
+    <button type="submit" class="btn" onclick = "document.getElementById('connect-btn').click()">Join</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
             <div class="input-group-append">
                 <button id="conference-leave-btn" class="btn btn-danger center" type="button" disabled style="display:none">Leave</button>
             </div>
