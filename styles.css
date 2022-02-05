@@ -1,3 +1,8 @@
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .container {
   padding-bottom: 1rem;
 }
@@ -41,7 +46,7 @@ footer {
   display: block;
 }
 
-{box-sizing: border-box;}
+
 
 /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
@@ -85,6 +90,7 @@ footer {
 .form-container input[type=text]:focus, .form-container input[type=password]:focus {
   background-color: #ddd;
   outline: none;
+  margin: auto;
 }
 
 /* Set a style for the submit/login button */
@@ -97,6 +103,7 @@ footer {
   width: 100%;
   margin-bottom:10px;
   opacity: 0.8;
+  margin: auto;
 }
 
 /* Add a red background color to the cancel button */
