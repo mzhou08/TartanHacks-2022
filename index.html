@@ -59,12 +59,14 @@
                         </div>
                         <label class="input-group-text" for="chk-dolby-voice" style="border-left: none; padding-left: 0;">Dolby Voice</label>
                     </div>
-                    <input id="conference-alias-input" type="text" class="form-control" placeholder="Conference alias">
+
                     <div class="input-group-append">
                         <button id="conference-join-btn" class="btn btn-primary" type="button" disabled>Join</button>
-                        <button id="conference-listen-btn" class="btn btn-primary" type="button" disabled>Listen</button>
+                        <button id="conference-listen-btn" class="btn btn-primary" type="button" disabled style="display:none;">Listen</button>
                         <button id="conference-leave-btn" class="btn btn-danger" type="button" disabled>Leave</button>
+                        <button id="conference-show-id" class="btn" type="button" onClick="document.getElementById('conference-alias-input').style.display = 'inline'">show id</button>
                     </div>
+                    <input id="conference-alias-input" type="text" class="form-control" placeholder="Conference alias" style="display:none;" >
                   </div>
                 </div>
             </div>
