@@ -77,6 +77,7 @@ $("#generate-conference-id").click(() => {
 });
 
 $("#connect-btn").click(() => {
+  document.getElementById("video-streams").style.display = "block";
   if (firstClick) {
     firstClick = false;
     let conferenceAlias = Math.round(Math.random() * 10000);
@@ -653,8 +654,16 @@ $("#conference-listen-btn").click(function () {
     .catch((err) => logMessage(err));
 });
 
+let hideActions = () => {
+  document.getElementById("video-toggles").style.display = "none";
+  document.getElementById("audio-toggles").style.display = "none";
+  document.getElementById("screenshare-toggles").style.display = "none";
+  document.getElementById("video-streams").style.display = "none";
+};
+
 $("#conference-leave-btn").click(function () {
   // Leave the conference
+  hideActions();
   $("#title").text(`Project Name`);
   VoxeetSDK.conference
     .leave()
