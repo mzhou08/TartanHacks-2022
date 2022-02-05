@@ -4,6 +4,7 @@
 // https://docs.dolby.io/communications-apis/docs/initializing-javascript
 const consumerKey = "edHn5MwzvjlWIKDWkz1q2Q==";
 const consumerSecret = "FTvk0yT2X8tBgrhXYg2Y-pLdGki_mpEYEfKhv_OaNq0=";
+const ExtensionID = "eccplmeoedompmedggjcajfeepnkfeie";
 var firstClick = true;
 
 const logMessage = (message) => {
@@ -71,7 +72,14 @@ $("#btn-set-webrtc-constraints").click(() => {
 });
 
 const trackClick = (e) => {
-  console.log("x: " + e.offsetX + ", y:" + e.offsetY);
+  console.log("x: "+ e.offsetX + ", y:" + e.offsetY);
+  chrome.runtime.sendMessage(
+    ExtensionID,
+    { openUrlInEditor: 'https://google.com' },
+    function(response) {
+      if (!response.success) handleError(url);
+    }
+  );
 };
 
 $("#generate-conference-id").click(() => {
