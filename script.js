@@ -78,6 +78,7 @@ $("#generate-conference-id").click(() => {
 
 $("#connect-btn").click(() => {
   document.getElementById("video-streams").style.display = "block";
+  document.getElementById("conference-leave-btn").style.display = "block";
   if (firstClick) {
     firstClick = false;
     let conferenceAlias = Math.round(Math.random() * 10000);
@@ -406,6 +407,7 @@ $("#connect-btn").click(() => {
 });
 
 $("#conference-join-btn").click(() => {
+  document.getElementById("conference-leave-btn").style.display = "block";
   const liveRecording = $("#chk-live-recording")[0].checked;
   const dolbyVoice = $("#chk-dolby-voice")[0].checked;
 
@@ -659,6 +661,7 @@ let hideActions = () => {
   document.getElementById("audio-toggles").style.display = "none";
   document.getElementById("screenshare-toggles").style.display = "none";
   document.getElementById("video-streams").style.display = "none";
+  document.getElementById("conference-leave-btn").style.display = "none";
 };
 
 $("#conference-leave-btn").click(function () {
