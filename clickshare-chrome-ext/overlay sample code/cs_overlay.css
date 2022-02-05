@@ -1,0 +1,551 @@
+#sgt-actions.sgt-just-added {
+  transform: translateY(-30px);
+}
+#sgt-actions.sgt-just-added button {
+  transition: unset;
+}
+
+#sgt-actions {
+  position: fixed;
+  z-index: 100000;
+  display: flex;
+  align-items: flex-start;
+  top: -30px;
+  height: 30px;
+  width: fit-content;
+  margin: 0 auto; /* Will not center vertically and won't work in IE6/7. */
+  left: 0;
+  right: 0;
+  justify-content: center;
+  transition: all 1s ease-in-out;
+}
+
+#sgt-actions.sgt-has-actions {
+  top: 0px;
+}
+
+#sgt-actions button {
+  font-weight: initial;
+  font-family: "Arial";
+  text-transform: capitalize;
+  font-variant: small-caps;
+  transition: all 1s ease-in-out;
+  margin: 0 10px;
+  padding: 1px 10px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border: 2px outset black;
+  border-top: none;
+  font-size: 17px;
+  cursor: pointer;
+  height: 30px;
+  max-height: 30px;
+  border-color: var(--tile-fg-color);
+  background-color: var(--tile-bg-color);
+  color: var(--tile-fg-color);
+}
+
+#sgt-actions button:hover {
+  border-color: var(--tile-highlight-fg-color);
+  background-color: var(--tile-bg-color);
+  color: var(--tile-highlight-fg-color);
+
+  box-shadow: rgb(255, 255, 99) 0px 0px 6px,
+    rgb(255 0 255) -3px 0px 7px,
+      rgb(0, 255, 255) 3px 0px 7px,
+        rgb(255 0 255) -3px -3px 7px,
+          rgb(0, 255, 255) 3px -3px 7px;
+}
+
+#sgt-actions button:focus {
+  border-color: var(--tile-highlight-fg-color);
+  background-color: var(--tile-bg-color);
+  color: var(--tile-highlight-fg-color);
+  outline: none;
+
+  box-shadow: rgb(255, 255, 99) 0px 0px 6px,
+    rgb(255 0 255) -7px 0px 14px,
+      rgb(0, 255, 255) 7px 0px 14px,
+        rgb(255 0 255) -7px -5px 14px,
+          rgb(0, 255, 255) 7px -5px 14px;
+}
+
+#sgt-actions button:disabled {
+  border-color: var(--tile-faded-border-color);
+  background-color: var(--tile-faded-bg-color);
+  color: var(--tile-faded-fg-color);
+  box-shadow: none;
+}
+
+#sgt-player-order.sgt-just-added {
+  transform: scaleX(0);
+}
+#sgt-player-order {
+  position: fixed;
+  z-index: 100000;
+  writing-mode: vertical-rl;
+  display: flex;
+  align-items: flex-end;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  justify-content: center;
+  transition: all 1s ease-in-out;
+}
+
+#sgt-player-order .sgt-player {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 30px;
+  width: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border: 1.5px solid black;
+  border-left: none;
+  box-sizing: content-box;
+  background: var(--tile-bg-color);
+  font-size: 12px;
+  color: var(--tile-fg-color);
+  padding-right: 3px;
+}
+
+#sgt-player-order div.sgt-player {
+  transition: all 1.3s ease-in-out;
+  left: 0px;
+}
+#sgt-player-order div.sgt-player.sgt-active {
+  width: 25px;
+}
+#sgt-player-order div.sgt-player.sgt-has-passed {
+  width: 6px;
+  color: transparent;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+#sgt-notification {
+  position: fixed;
+  z-index: 100000;
+  width: fit-content;
+  margin: 0 auto; /* Will not center vertically and won't work in IE6/7. */
+  top: 20px;
+  left: 0px;
+  right: 0px;
+  justify-content: center;
+  transition: all 1s ease-in-out;
+  filter: drop-shadow(0 0 8px cyan);
+  border-radius: 20px;
+  background: #000;
+  --aug-border: 2px;
+  --aug-border-bg: cyan;
+  text-align: center;
+}
+
+#sgt-notification	.sgt-message {
+  width: calc(100% - 20px);
+  max-width: 640px;
+  margin: 0 auto;
+  overflow: hidden;
+  transition: all 1s ease-in-out;
+  border-radius: 15px;
+}
+#sgt-notification	.sgt-message p {
+  color: #fff;
+  display: block;
+  line-height: 1.4em;
+  text-align: justify;
+  padding: 0;
+  line-height: 1.5em;
+  margin: 1.5em 1em;
+}
+
+#sgt-notification	.sgt-message a {
+  color: greenyellow;
+}
+
+#sgt-notification	#sgt-notification-close-btn {
+  text-align: center;
+  background: black;
+  color: goldenrod;
+  border-color: goldenrod;
+  margin: 1em;
+  margin-top: 0;
+  padding: 0.4em 1em 0.58em;
+  cursor: pointer;
+  line-height: 1em;
+}
+#sgt-notification	#sgt-notification-close-btn:hover {
+  background: #400;
+}
+
+#sgt-bank {
+  font-size: 18px;
+  position: fixed;
+  right: 0;
+  z-index: 100000;
+  display: flex;
+  bottom: 0px;
+  height: 100%;
+  flex-direction: column;
+  align-items: flex-end;
+  top: 0;
+  line-height: 1em;
+  font-family: monospace;
+  pointer-events: none;
+}
+
+#sgt-bank .sgt-token {
+  width: 1.6em;
+  height: 1.2em;
+  text-align: center;
+  margin-left: 0.1em;
+  vertical-align: text-top;
+}
+
+.sgt-token-amount {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+
+#sgt-bank.sgt-just-added #sgt-bank-actions {
+  transform: translateX(50px);
+}
+#sgt-bank #sgt-bank-actions {
+  transition: all 1s;
+}
+
+#sgt-bank.sgt-just-added #sgt-bank-totals {
+  transform: translateX(100%);
+}
+#sgt-bank #sgt-bank-totals {
+  transition: all 1s;
+}
+
+#sgt-bank-totals {
+  margin-top: 100px;
+  width: fit-content;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+#sgt-bank-totals tr.sgt-token td {
+  margin: 0;
+  padding: 0.2em 0;
+  text-align: center;
+}
+
+#sgt-bank-totals td {
+  padding: 0.1em 0.5em;
+  text-align: right;
+  border: none;
+}
+
+#sgt-bank-totals tr td:first-child {
+  border-left: 1.5px solid black;
+  padding-left: 0.4em;
+}
+
+#sgt-bank-totals tr:first-child td {
+  border-top: 1.5px solid black;
+}
+#sgt-bank-totals tr:first-child td:first-child {
+  border-top-left-radius: 10px;
+}
+#sgt-bank-totals tr:last-child td {
+  border-bottom: 1.5px solid black;
+}
+#sgt-bank-totals tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+#sgt-bank-totals tr {
+  background: var(--tile-bg-color);
+  color: var(--tile-fg-color);
+  transition: all 1s;
+  font-size: 18px;
+  line-height: 1.2em;
+}
+#sgt-bank-totals tr.sgt-token {
+  background: darkgray;
+}
+
+#sgt-bank-totals tr td .sgt-token {
+  display: none;
+}
+
+#sgt-bank.sgt-hide-opponents.sgt-animating-1s #sgt-bank-totals tr.sgt-opponent {
+  font-size: 0px;
+  color: transparent;
+}
+
+#sgt-bank.sgt-hide-opponents:not(.sgt-animating-1s) #sgt-bank-totals tr.sgt-opponent {
+  display: none;
+  font-size: 0px;
+  color: transparent;
+  transition: none;
+}
+
+#sgt-bank-log {
+  font-size: 16px;
+  margin-top: 1em;
+}
+
+#sgt-bank-log .sgt-bank-log-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 2em;
+  margin: 0;
+  padding: 0;
+  transition: height 1s ease, opacity 1s ease, transform 1s ease 1s;
+  cursor: default;
+  pointer-events: auto;
+}
+
+#sgt-bank-log .sgt-bank-log-entry.sgt-inter-player {
+  height: 3.6em;
+}
+
+#sgt-bank-log .sgt-bank-log-entry[title] {
+  cursor: help;
+}
+
+#sgt-bank-log {
+  transition: transform 1s ease;
+}
+#sgt-bank-log.sgt-hide {
+  transform: translateX(100%);
+}
+
+#sgt-bank-log .sgt-bank-log-entry.sgt-new {
+  height: 0;
+  margin: 0;
+  padding: 0;
+  transform: translateX(100%);
+}
+
+#sgt-bank-log .sgt-bank-log-entry .sgt-bank-log-counterpart {
+  background: var(--tile-bg-color);
+  color: var(--tile-fg-color);
+  border-top-left-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
+  border: 1.5px solid black;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  padding: 0.2em 0em 0.2em 0.3em;
+  border-right: none;
+  position: relative;
+  line-height: 1.2em;
+  transition: all 1.3s linear;
+}
+
+#sgt-bank-log .sgt-bank-log-entry:first-of-type .sgt-bank-log-counterpart {
+  border-top: 1.3px solid black;
+}
+#sgt-bank-log .sgt-bank-log-entry:last-of-type .sgt-bank-log-counterpart {
+  border-bottom: 1.3px solid black;
+}
+
+#sgt-bank-log .sgt-bank-log-entry:nth-of-type(4) { opacity: 0.7; }
+#sgt-bank-log .sgt-bank-log-entry:nth-of-type(5) { opacity: 0.5; }
+#sgt-bank-log .sgt-bank-log-entry:nth-of-type(6) { opacity: 0.4; }
+#sgt-bank-log .sgt-bank-log-entry:nth-of-type(7) { opacity: 0.2; }
+#sgt-bank-log .sgt-bank-log-entry:nth-of-type(8) { opacity: 0; }
+
+#sgt-bank-log .sgt-bank-log-entry.sgt-inter-player .sgt-bank-log-counterpart.sgt-initiator {
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+}
+#sgt-bank-log .sgt-bank-log-entry.sgt-inter-player .sgt-bank-log-counterpart.sgt-associate {
+  border-top: none;
+  border-top-left-radius: 0;
+}
+
+
+#sgt-trans-form {
+  display: grid;
+  grid-template:
+    "token help  toggle" 1.4em
+    "input input input"  auto
+    " btn   btn   btn "  auto
+    " msg   msg   msg "  auto
+    / 1fr 1.4em 1.4em;
+   gap: 0.2em;
+}
+#sgt-trans-form.allow-inter-player-transactions {
+  display: grid;
+  grid-template:
+    "token help  toggle" 1.4em
+    "assoc assoc assoc"  auto
+    "input input input"  auto
+    " btn   btn   btn "  auto
+    " msg   msg   msg "  auto
+    / 1fr 1.4em 1.4em;
+   gap: 0.2em;
+}
+#sgt-trans-form * {
+  pointer-events: auto;
+}
+#sgt-trans-form #sgt-trans-form-associate-selection {
+  display: none;
+}
+#sgt-trans-form.allow-inter-player-transactions #sgt-trans-form-associate-selection {
+  display: block;
+  grid-area: assoc;
+}
+#sgt-trans-form #sgt-trans-form-token-selection {
+  grid-area: token;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  white-space: nowrap;
+  max-width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#sgt-trans-form {
+  border-color: rgb(36, 36, 36);
+  background-color: var(--tile-faded-bg-color);
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  border-top-left-radius: 0.4em;
+    border-bottom-left-radius: 0.4em;
+    border: 1.3px solid black;
+    border-right: none;
+}
+#sgt-trans-form #sgt-trans-form-help{
+  grid-area: help;
+  background-color: var(--tile-bg-color);
+  color: var(--tile-fg-color);
+  fill: var(--tile-fg-color);
+  padding: 0.2em 0.2em;
+  cursor: pointer;
+  border-width: 1.1px;
+}
+
+#sgt-trans-form #sgt-trans-form-help:hover {
+  background-color: var(--tile-faded-bg-color);
+  color: var(--tile-faded-fg-color);
+  fill: var(--tile-faded-fg-color);
+}
+#sgt-trans-form #sgt-trans-form-help svg {
+  height: 1em;
+  width: 1em;
+  height: 100%;
+  width: 100%;
+}
+#sgt-trans-form #sgt-trans-form-showhide{
+  grid-area: toggle;
+  background-color: var(--tile-bg-color);
+  color: var(--tile-fg-color);
+  fill: var(--tile-fg-color);
+  padding: 0.2em 0.2em;
+  cursor: pointer;
+  border-width: 1.1px;
+}
+
+#sgt-trans-form #sgt-trans-form-showhide:hover {
+  background-color: var(--tile-faded-bg-color);
+  color: var(--tile-faded-fg-color);
+  fill: var(--tile-faded-fg-color);
+}
+#sgt-trans-form #sgt-trans-form-showhide svg {
+  height: 1em;
+  width: 1em;
+  height: 100%;
+  width: 100%;
+}
+
+#sgt-trans-form  {
+  overflow: hidden;
+  transition: all 1s;
+}
+
+#sgt-trans-form-error {
+  grid-area: msg;
+  font-size: 13px;
+  font-family: sans-serif;
+  opacity: 0;
+  color: var(--tile-faded-fg-color);
+}
+
+#sgt-trans-form-submit-button {
+  grid-area: btn;
+  background-color: var(--tile-bg-color);
+  color: var(--tile-fg-color);
+  fill: var(--tile-fg-color);
+  border-width: 1.1px;
+}
+
+#sgt-trans-form-submit-button[disabled] {
+  grid-area: btn;
+  background-color: var(--tile-bg-color);
+  color: var(--tile-disabled-fg-color);
+  fill: var(--tile-disabled-fg-color);
+  border-width: 1.1px;
+}
+
+#sgt-trans-form-input-formula {
+  grid-area: input;
+
+}
+
+#sgt-trans-form {
+  transition: background-color 0.5s linear, border-color 0.5s linear;
+  width: 210px;
+  margin-top: 1em;
+}
+#sgt-trans-form.sgt-hide {
+  background-color: transparent;
+  border-color: transparent;
+  transition: background-color 0.3s linear 0.7s, border-color 0.3s linear 0.7s;
+}
+
+#sgt-trans-form #sgt-trans-form-input-formula,
+#sgt-trans-form #sgt-trans-form-submit-button,
+#sgt-trans-form #sgt-trans-form-error,
+#sgt-trans-form #sgt-trans-form-associate-selection,
+#sgt-trans-form #sgt-trans-form-token-selection {
+  width: 100%;
+}
+
+#sgt-trans-form #sgt-trans-form-help,
+#sgt-trans-form #sgt-trans-form-input-formula,
+#sgt-trans-form #sgt-trans-form-submit-button,
+#sgt-trans-form #sgt-trans-form-associate-selection,
+#sgt-trans-form #sgt-trans-form-token-selection {
+  transition: all 0.5s linear, opacity 0.3s linear 0.5s;
+  height: 1.4em;
+}
+
+#sgt-trans-form #sgt-trans-form-error {
+  transition: all 0.5s linear;
+  height: 0em;
+  opacity: 1;
+}
+
+#sgt-trans-form #sgt-trans-form-error.in-error {
+  transition: all 0.5s linear;
+  height: 1.4em;
+}
+
+#sgt-trans-form.sgt-hide #sgt-trans-form-help,
+#sgt-trans-form.sgt-hide #sgt-trans-form-input-formula,
+#sgt-trans-form.sgt-hide #sgt-trans-form-submit-button,
+#sgt-trans-form.sgt-hide #sgt-trans-form-associate-selection,
+#sgt-trans-form.sgt-hide #sgt-trans-form-token-selection,
+#sgt-trans-form.sgt-hide #sgt-trans-form-error,
+#sgt-trans-form.sgt-hide #sgt-trans-form-error.in-error
+{
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  transition: opacity 0.3s linear, height 0.5s linear 0.3s, width 0.5s linear 0.3s, padding 0.5s linear 0.3s, margin 0.5s linear 0.3s, border-width 0.5s linear 0.3s;
+}
