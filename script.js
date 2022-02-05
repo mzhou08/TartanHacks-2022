@@ -76,7 +76,7 @@ $("#generate-conference-id").click(() => {
 });
 
 $("#connect-btn").click(() => {
-  let conferenceAlias = "conf-" + Math.round(Math.random() * 10000);
+  let conferenceAlias = Math.round(Math.random() * 10000);
   $("#conference-alias-input").val(conferenceAlias);
   const externalId = $("#external-id-input").val();
   const username = $("#username-input").val();
@@ -87,7 +87,7 @@ $("#connect-btn").click(() => {
     .open({ name: username, externalId: externalId, avatarUrl: avatarUrl })
     .then(() => {
       // Update the login message with the name of the user
-      $("#title").text(`You are connected as ${username}`);
+      $("#title").text(`You are in room ${conferenceAlias}`);
       $("#conference-join-btn").attr("disabled", false);
       $("#conference-listen-btn").attr("disabled", false);
       $("#connect-btn").attr("disabled", true);
