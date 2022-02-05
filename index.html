@@ -26,10 +26,10 @@
     <main role="main">
         <div class="container">
             <img src = "ClickShare.png" width = "200px" height = "70px" style = "padding-top: 20px;">
-            <h1 id="title" class="title">Project Name</h1>
+            <h1 id="title" class="title"></h1>
             <div class="form-group row">
-                <label for="username-input" class="col-sm-3 col-form-label">Name:</label>
-                <div class="col-sm-9">
+                <label for="username-input" class="col-sm-3 col-form-label" style = "position: relative; left: 115px; font-family: monospace;">Name:</label>
+                <div class="col-sm-2" style = "position: relative; right: 110px;">
                     <div class="input-group input-group-sm">
                         <input id="external-id-input" type="text" class="form-control" placeholder="External ID" title="External ID" style="display: none;">
                         <input id="username-input" type="text" class="form-control" placeholder="Your name" title="Your name">
@@ -38,12 +38,21 @@
                     </div>
                 </div>
             </div>
-            <div class="input-group-append">
-                <input id="conference-alias-input" type="text" class="form-control" placeholder="Conference alias" >
-                <button id="generate-conference-id" class="btn btn-primary" type="button" >Get Meeting ID</button>
+            <div class="form-group row">
+                <label for="username-input" class="col-sm-3 col-form-label" style="font-family: monospace;">Enter Meeting ID:</label>
+                <div class="col-sm-2" style = "position: relative; right: 110px;">
+                    <div class="input-group input-group-sm">
+                        <input id="conference-alias-input" type="text" class="form-control" placeholder="Conference alias" style="width: 200px">
+                        <button id="conference-join-btn" class="btn btn-primary center" type="button">Join Meeting</button>
+                    </div>
+                </div>
             </div>
+            <!-- <div class="input-group-append">
+                <label for="username-input" class="col-sm-3 col-form-label">Enter Meeting ID:</label>
+                <input id="conference-alias-input" type="text" class="form-control" placeholder="Conference alias" style="width: 200px">
+            </div> -->
             <div class="input-group-append">
-                <button id="connect-btn" class="btn btn-primary center" type="button">Connect</button>
+                <button id="connect-btn" class="btn btn-primary center" type="button">Host Meeting</button>
                 
             </div>
             <div class="input-group-append">
@@ -256,7 +265,7 @@
 
         <!-- Display logs -->
         <div class="bg-light" style = "display: none">
-            <div class="container">
+            <div class="container"
                 <h2 class="title">Logs</h2>
                 <div class="form-group">
                     <textarea id="logs-area" class="form-control" rows="10" readonly></textarea>
