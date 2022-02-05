@@ -6,7 +6,7 @@ const consumerKey = "edHn5MwzvjlWIKDWkz1q2Q==";
 const consumerSecret = "FTvk0yT2X8tBgrhXYg2Y-pLdGki_mpEYEfKhv_OaNq0=";
 const ExtensionID = "eccplmeoedompmedggjcajfeepnkfeie";
 var firstClick = true;
-
+var roomNumber = "";
 const logMessage = (message) => {
   console.log(`${new Date().toISOString()} - ${message}`);
   $("#logs-area").val(
@@ -72,11 +72,11 @@ $("#btn-set-webrtc-constraints").click(() => {
 });
 
 const trackClick = (e) => {
-  console.log("x: "+ e.offsetX + ", y:" + e.offsetY);
+  console.log("x: " + e.offsetX + ", y:" + e.offsetY);
   chrome.runtime.sendMessage(
     ExtensionID,
-    { openUrlInEditor: 'https://google.com' },
-    function(response) {
+    { openUrlInEditor: "https://google.com" },
+    function (response) {
       if (!response.success) handleError(url);
     }
   );
@@ -427,7 +427,7 @@ function connectClick() {
     .open({ name: username, externalId: externalId, avatarUrl: avatarUrl })
     .then(() => {
       // Update the login message with the name of the user
-      $("#title").text(`You are in room ${conferenceAlias}`);
+
       $("#conference-join-btn").attr("disabled", false);
       $("#conference-listen-btn").attr("disabled", false);
       $("#connect-btn").attr("disabled", true);
@@ -475,7 +475,6 @@ function joinClick() {
 
       logMessage("Join the conference with the options:");
       logMessage(JSON.stringify(joinOptions));
-
       // 2. Join the conference
       return VoxeetSDK.conference
         .join(conference, joinOptions)
@@ -591,7 +590,12 @@ function joinClick() {
 
 $("#newjoin-btn").click(connectClick);
 
-$("#joinsmeeting-btn").click(joinClick);
+$("#joinsmeeting-btn").click(() => {
+  $("#title").text(`You are in room ` + $("#conference-alias-input").val());
+  document.getElementById("conference-leave-btn").style.display = "block";
+
+  joinClick();
+});
 
 $("#form").submit(function (e) {
   e.preventDefault();
