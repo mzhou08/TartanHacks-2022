@@ -70,6 +70,10 @@ $("#btn-set-webrtc-constraints").click(() => {
   });
 });
 
+const trackClick = (e) => {
+  console.log("x: "+ e.offsetX + ", y:" + e.offsetY);
+};
+
 $("#generate-conference-id").click(() => {
   // Generate a random conference alias
   let conferenceAlias = Math.round(Math.random() * 10000);
