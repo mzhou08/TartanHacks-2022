@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dolby.io Web SDK Sample Application</title>
+    <title>ClickShare</title>
 
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css"
@@ -23,32 +23,17 @@
 </head>
 <body>
 
+ <!-- Container for the video streams -->
+ <div>
+    <div class="container">
+        <h2 class="title">Video Streams</h2>
+        <div id="streams-containers" class="row" class ="videoWidth"></div>
+    </div>
+</div>
 
     <main role="main">
         <div class="container">
-            <h1 id="title" class="title">You are not connected to Dolby.io APIs</h1>
-    
-            <div class="form-group row">
-                <label for="webrtc-constraints" class="col-sm-3 col-form-label">WebRTC video constraints:</label>
-                <div class="col-sm-9">
-                <div class="input-group input-group-sm">
-                    <select id="webrtc-constraints" class="custom-select">
-                        <option value="auto">Automatic Resolution</option>
-                        <option value="640">Resolution 640 x 360</option>
-                        <option value="960">Resolution 960 x 540</option>
-                        <option value="1280">Resolution 1280 x 720</option>
-                        <option value="min640">Minimum Resolution 640 x 360</option>
-                        <option value="min960">Minimum Resolution 960 x 540</option>
-                        <option value="min1280">Minimum Resolution 1280 x 720</option>
-                    </select>
-                    <div class="input-group-append">
-                        <button id="btn-set-webrtc-constraints" class="btn btn-secondary" type="button" disabled>Set</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
+            <div class="form-group">
                 <label for="username-input" class="col-sm-3 col-form-label">About you:</label>
                 <div class="col-sm-9">
                     <div class="input-group input-group-sm">
@@ -63,7 +48,7 @@
             </div>
 
             <!-- Join or Leave a Conference -->
-            <div class="form-group row">
+            <div class="form-group">
                 <label for="conference-alias-input" class="col-sm-3 col-form-label">Conference alias:</label>
                 <div class="col-sm-9">
                 <div class="input-group input-group-sm">
@@ -89,47 +74,9 @@
                 </div>
             </div>
     
-            <!-- Video Devices -->
-            <div class="form-group row">
-                <label for="video-devices" class="col-sm-3 col-form-label">Video Devices:</label>
-                <div class="col-sm-9">
-                <div class="input-group input-group-sm">
-                    <select id="video-devices" class="custom-select"></select>
-                    <div class="input-group-append">
-                        <button id="btn-set-video-device" class="btn btn-info" type="button" disabled>Set</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
-    
-            <!-- Input Audio Devices -->
-            <div class="form-group row">
-                <label for="input-audio-devices" class="col-sm-3 col-form-label">Input Audio Devices:</label>
-                <div class="col-sm-9">
-                <div class="input-group input-group-sm">
-                    <select id="input-audio-devices" class="custom-select"></select>
-                    <div class="input-group-append">
-                        <button id="btn-set-input-audio-device" class="btn btn-info" type="button" disabled>Set</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
-    
-            <!-- Output Audio Devices -->
-            <div class="form-group row">
-                <label for="output-audio-devices" class="col-sm-3 col-form-label">Output Audio Devices:</label>
-                <div class="col-sm-9">
-                    <div class="input-group input-group-sm">
-                        <select id="output-audio-devices" class="custom-select"></select>
-                        <div class="input-group-append">
-                            <button id="btn-set-output-audio-device" class="btn btn-info" type="button" disabled>Set</button>
-                        </div>
-                      </div>
-                </div>
-            </div>
 
             <!-- Actions on Video -->
-            <div class="form-group row" data-conference="on">
+            <div class="form-group" data-conference="on">
                 <label class="col-sm-3 col-form-label">Video actions:</label>
                 <div class="col-sm-9">
                     <div class="input-group input-group-sm">
@@ -142,7 +89,7 @@
             </div>
 
             <!-- Actions on Audio -->
-            <div class="form-group row" data-conference="on">
+            <div class="form-group" data-conference="on">
                 <label class="col-sm-3 col-form-label">Audio actions:</label>
                 <div class="col-sm-9">
                     <div class="input-group input-group-sm">
@@ -157,7 +104,7 @@
             </div>
 
             <!-- Actions on Screen Share -->
-            <div class="form-group row" data-conference="on">
+            <div class="form-group" data-conference="on">
                 <label class="col-sm-3 col-form-label">Screen Share actions:</label>
                 <div class="col-sm-9">
                     <div class="input-group input-group-sm">
@@ -169,61 +116,8 @@
                 </div>
             </div>
 
-
-            <!-- Play a video -->
-            <div class="form-group row" data-conference="on">
-                <label for="video-url-input" class="col-sm-3 col-form-label">Play Video URL:</label>
-                <div class="col-sm-9">
-                <div class="input-group input-group-sm">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-info-circle gray fa-lg" title="The video URL must be publicly accessible"></i></span>
-                    </div>
-                    <input id="video-url-input" type="text" class="form-control" value="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4">
-                    <div class="input-group-append">
-                        <button id="video-start-btn" class="btn btn-primary" type="button" disabled>Start</button>
-                        <button id="video-stop-btn" class="btn btn-danger" type="button" disabled>Stop</button>
-                        <button id="video-pause-btn" class="btn btn-warning" type="button" disabled>Pause</button>
-                        <button id="video-play-btn" class="btn btn-warning" type="button" disabled>Play</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
-
-            <!-- Recording Actions and Status -->
-            <div class="form-group row" data-conference="on">
-                <label class="col-sm-3 col-form-label">Recording:</label>
-                <div class="col-sm-9">
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i id="recording-status" class="fas fa-stop-circle gray fa-lg"></i></span>
-                        </div>
-                        <div class="input-group-append">
-                            <button id="start-recording-btn" class="btn btn-primary" type="button" disabled>Start</button>
-                            <button id="stop-recording-btn" class="btn btn-danger" type="button" disabled>Stop</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- RTMP Streaming -->
-            <div class="form-group row" data-conference="on">
-                <label for="rtmp-url-input" class="col-sm-3 col-form-label">RTMP Stream URL:</label>
-                <div class="col-sm-9">
-                <div class="input-group input-group-sm">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i id="rtmp-status" class="fas fa-broadcast-tower gray"></i></span>
-                    </div>
-                    <input id="rtmp-url-input" type="text" class="form-control" value="rtmp://a.rtmp.youtube.com/live2/">
-                    <div class="input-group-append">
-                        <button id="start-rtmp-btn" class="btn btn-primary" type="button" disabled>Start</button>
-                        <button id="stop-rtmp-btn" class="btn btn-danger" type="button" disabled>Stop</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
-
             <!-- Messaging -->
-            <div class="form-group row" data-conference="on">
+            <div class="form-group" data-conference="on">
                 <label for="message-input" class="col-sm-3 col-form-label">Message:</label>
                 <div class="col-sm-9">
                 <div class="input-group input-group-sm">
@@ -236,7 +130,7 @@
             </div>
 
             <!-- Invitation -->
-            <div class="form-group row" data-conference="on">
+            <div class="form-group" data-conference="on">
                 <label for="message-input" class="col-sm-3 col-form-label">Invitation:</label>
                 <div class="col-sm-9">
                 <div class="input-group input-group-sm">
@@ -258,14 +152,6 @@
             </div>
         </div>
 
-        <!-- Container for the video streams -->
-        <div>
-            <div class="container">
-                <h2 class="title">Video Streams</h2>
-                <div id="streams-containers" class="row"></div>
-            </div>
-        </div>
-
         <!-- Display logs -->
         <div class="bg-light">
             <div class="container">
@@ -277,14 +163,59 @@
         </div>
     </main>
 
-    <footer class="text-muted">
+     <!-- Site footer -->
+     <footer class="site-footer">
         <div class="container">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-            <p>Powered by <a href="https://www.dolby.io">Dolby.io</a>. SDK Version <span id="sdk-version">0.0.0</span>. <a href="https://github.com/dolbyio-samples/dolbyio-web-sdk-sample" target="_blank">GitHub repo</a></p>
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <h6>About</h6>
+              <p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative  to help the upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as the code wants to be simple. We will help programmers build up concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
+            </div>
+  
+            <div class="col-xs-6 col-md-3">
+              <h6>Categories</h6>
+              <ul class="footer-links">
+                <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
+                <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
+                <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
+                <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
+                <li><a href="http://scanfcode.com/category/android/">Android</a></li>
+                <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
+              </ul>
+            </div>
+  
+            <div class="col-xs-6 col-md-3">
+              <h6>Quick Links</h6>
+              <ul class="footer-links">
+                <li><a href="http://scanfcode.com/about/">About Us</a></li>
+                <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
+                <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
+                <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
+                <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
+              </ul>
+            </div>
+          </div>
+          <hr>
         </div>
-    </footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+              <p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by 
+           <a href="#">Scanfcode</a>.
+              </p>
+            </div>
+  
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <ul class="social-icons">
+                <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>   
+              </ul>
+            </div>
+          </div>
+        </div>
+  </footer>
 
     <script id="template-participant" type="text/x-jsrender">
         <li id="participant-{{:id}}">
@@ -294,9 +225,9 @@
     </script>
 
     <script id="template-video" type="text/x-jsrender">
-        <div id="stream-{{:id}}" class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <video width="150%" height="300" autoplay="autoplay" muted="true" playsinline="true"></video>
+        <div id="stream-{{:id}}" style = "position:relative; right:600px; top:2px;>
+            <div class="card mb- shadow-sm">
+                <video width="100%" height="200"  autoplay="autoplay" muted="true" playsinline="true"></video>
                 <div class="card-body">
                     <p class="card-text">This is a video stream from {{:name}}.</p>
                     <div class="d-flex justify-content-between align-items-center">
@@ -308,11 +239,10 @@
             </div>
         </div>
     </script>
-
-    <script id="template-screenshare" type="text/x-jsrender">
-        <div id="stream-screenshare" class="col-md-6">
-            <div class="card mb-4 shadow-sm">
-                <video width="100%" height="300" autoplay="autoplay" muted="true" playsinline="true"></video>
+    <script id="template-screenshare" type="text/x-jsrender" class = "jim">
+        <div id="stream-screenshare" style = "position:relative; right: 150px; down: 100px;">
+            <div class="card mb">
+                <video width="150%" height="550" autoplay="autoplay" muted="true" playsinline="true"></video>
                 <div class="card-body">
                     <p class="card-text">This is a screen share from {{:name}}.</p>
                 </div>
@@ -323,7 +253,7 @@
     <script id="template-video-url" type="text/x-jsrender">
         <div id="stream-video" class="col-md-6">
             <div class="card mb-4 shadow-sm">
-                <video width="100%" height="300" autoplay="autoplay" playsinline="true" src="{{:url}}"></video>
+                <video width="100%" height="300" align-items-center autoplay="autoplay" playsinline="true" src="{{:url}}"></video>
             </div>
         </div>
     </script>
