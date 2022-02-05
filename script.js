@@ -375,6 +375,10 @@ $("#conference-join-btn").click(() => {
           $("#send-message-btn").attr("disabled", false);
           $("#send-invitation-btn").attr("disabled", false);
 
+          $("#audio-toggles").css("display", "inline");
+          $("#video-toggles").style.display="inline";
+          $("#screenshare-toggles").style.display="inline";
+
           setRecordingState(VoxeetSDK.recording.current != null);
         });
     })

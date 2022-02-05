@@ -72,6 +72,47 @@
                 </div>
             </div>
     
+            <!-- Actions on Video -->
+            <div class="form-group row" data-conference="on" id="video-toggles" style="display:none">
+                <label class="col-sm-3 col-form-label">Video actions:</label>
+                <div class="col-sm-9">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-append">
+                            <button id="start-video-btn" class="btn btn-success" type="button" disabled>Start video</button>
+                            <button id="stop-video-btn" class="btn btn-secondary" type="button" disabled>Stop video</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions on Audio -->
+            <div class="form-group row" data-conference="on" id="audio-toggles" style="display:none">
+                <label class="col-sm-3 col-form-label">Audio actions:</label>
+                <div class="col-sm-9">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-append">
+                            <button id="start-audio-btn" class="btn btn-success" type="button" disabled>Start audio</button>
+                            <button id="stop-audio-btn" class="btn btn-secondary" type="button" disabled>Stop audio</button>
+                            <button id="mute-audio-btn" class="btn btn-warning" type="button" disabled>Mute audio</button>
+                            <button id="unmute-audio-btn" class="btn btn-warning" type="button" disabled>Unmute audio</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions on Screen Share -->
+            <div class="form-group row" data-conference="on" id="screenshare-toggles" style="display:none">
+                <label class="col-sm-3 col-form-label">Screen Share actions:</label>
+                <div class="col-sm-9">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-append">
+                            <button id="start-screenshare-btn" class="btn btn-success" type="button" disabled>Start screen share</button>
+                            <button id="stop-screenshare-btn" class="btn btn-secondary" type="button" disabled>Stop screen share</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Video Devices -->
             <div class="form-group row" style="display:none;">
                 <label for="video-devices" class="col-sm-3 col-form-label">Video Devices:</label>
