@@ -198,6 +198,8 @@ $("#connect-btn").click(() => {
                 $("#video-toggles").attr("style", "display:inline;");
                 $("#screenshare-toggles").attr("style", "display:inline;");
 
+                $("#generate-conference-id").attr("disabled", true);
+
                 $("#btn-set-webrtc-constraints").attr("disabled", false);
       
                 $("#chk-live-recording").attr("disabled", true);
@@ -504,13 +506,13 @@ $("#conference-leave-btn").click(function () {
       conferenceAccessToken = null;
 
       $("#chk-live-recording").attr("disabled", false);
-
+      $("generate-conference-id").attr("enabled");
       $("#btn-set-output-audio-device").attr("disabled", true);
       $("#btn-set-input-audio-device").attr("disabled", true);
       $("#btn-set-video-device").attr("disabled", true);
 
       $("#btn-set-webrtc-constraints").attr("disabled", true);
-
+      $
       $("#conference-join-btn").attr("disabled", false);
       $("#conference-listen-btn").attr("disabled", false);
       $("#conference-leave-btn").attr("disabled", true);
