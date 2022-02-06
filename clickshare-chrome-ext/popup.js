@@ -72,8 +72,8 @@ document.addEventListener("DOMContentLoaded", function() {
             pointerEvents: 'none',
             "z-index": 100,
         });
-        img.style.left = String(clickCoords[0]["x"]) + "px";
-        img.style.top = String(clickCoords[0]["y"]) + "px";
+        img.style.left = String(clickCoords[0][0]) + "px";
+        img.style.top = String(clickCoords[0][1]) + "px";
         document.body.appendChild(img);
       })
     }, 2000);
