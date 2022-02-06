@@ -1,25 +1,36 @@
 let header = document.querySelector('#intro');
 let anim = [
-    { t: "{ }", ms: 400 },
-    { t: "{_}", ms: 400 },
-    { t: "{ }", ms: 400 },
-    { t: "{_}", ms: 400 },
-    { t: "{C_}", ms: 200 },
-    { t: "{Cl_}", ms: 200 },
-    { t: "{Cli_}", ms: 200 },
-    { t: "{Clic_}", ms: 200 },
-    { t: "{Click_}", ms: 200 },
-    { t: "{ClickS_}", ms: 200 },
-    { t: "{ClickSh_}", ms: 200 },
-    { t: "{ClickSha_}", ms: 200 },
-    { t: "{ClickShar_}", ms: 200 },
-    { t: "{ClickShare_}", ms: 400 },
-    { t: "{ClickShare}", ms: 400 },
-    { t: "{ClickShare_ }", ms: 400 },
-    { t: "{ClickShare}", ms: 400 },
-    { t: "{ClickShare_}", ms: 400 },
-    { t: "{ClickShare}", ms: 400 },
-    { t: "{ClickShare}", ms: 400 }
+    { t: "", ms: 400 },
+    { t: "_", ms: 400 },
+    { t: " ", ms: 400 },
+    { t: "_", ms: 400 },
+    { t: "C_", ms: 200 },
+    { t: "Cl_", ms: 200 },
+    { t: "Cli_", ms: 200 },
+    { t: "Clic_", ms: 200 },
+    { t: "Click_", ms: 200 },
+    { t: "ClickS_", ms: 200 },
+    { t: "ClickSh_", ms: 200 },
+    { t: "ClickSha_", ms: 200 },
+    { t: "ClickShar_", ms: 200 },
+    { t: "ClickShare_", ms: 200 },
+    { t: "ClickShare", ms: 200 },
+    { t: "ClickShare_", ms: 200 },
+    { t: "ClickShare", ms: 200 },
+    { t: "ClickShare_", ms: 200 },
+    { t: "ClickShar_", ms: 200 },
+    { t: "ClickSha_", ms: 200 },
+    { t: "ClickSh_", ms: 200 },
+    { t: "ClickS_", ms: 200 },
+    { t: "Click_", ms: 200 },
+    { t: "Clic_", ms: 200 },
+    { t: "Cli_", ms: 200 },
+    { t: "Cl_", ms: 200 },
+    { t: "C_", ms: 200 },
+    { t: "_", ms: 200 },
+    { t: "", ms: 200 },
+    { t: "_", ms: 200 },
+    { t: "", ms: 200 }
 ];
 let stepDenominator = 1;
 if (window.localStorage.stepDenominator)
@@ -39,5 +50,6 @@ let update = () => {
         }, 500);
         window.localStorage.stepDenominator = 2;
     }
+    
 }
 update();
