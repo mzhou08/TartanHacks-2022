@@ -73,13 +73,14 @@ $("#btn-set-webrtc-constraints").click(() => {
 
 const trackClick = (e) => {
   console.log("x: " + e.offsetX + ", y:" + e.offsetY);
-  chrome.runtime.sendMessage(
-    ExtensionID,
-    { openUrlInEditor: "https://google.com" },
-    function (response) {
-      if (!response.success) handleError(url);
+  chrome.runtime.sendMessage(ExtensionID, 'ping', response => {
+    if(chrome.runtime.lastError) {
+      setTimeout(ping, 1000);
+    } else {
+      console.log(response);
+      // Do whatever you want, background script is ready now
     }
-  );
+  });
 };
 
 $("#generate-conference-id").click(() => {
