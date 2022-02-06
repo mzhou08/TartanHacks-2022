@@ -8,9 +8,9 @@ const ExtensionID = "eccplmeoedompmedggjcajfeepnkfeie";
 var firstClick = true;
 var roomNumber = "";
 const logMessage = (message) => {
-  console.log(`${new Date().toISOString()} - ${message}`);
+  console.log(`${message}`);
   $("#logs-area").val(
-    (_, text) => `${text}${new Date().toISOString()} - ${message}\r\n`
+    (_, text) => `${text}${message}\r\n`
   );
 
   // Scroll to the end
@@ -137,9 +137,9 @@ $("#connect-btn").click(() => {
       VoxeetSDK.conference
         .create(conferenceOptions)
         .then((conference) => {
-          logMessage(
-            `Conference id: ${conference.id} & Conference alias ${conference.alias}`
-          );
+          // logMessage(
+          //   `Conference id: ${conference.id} & Conference alias ${conference.alias}`
+          // );
           conferenceId = conference.id;
 
           // See: https://docs.dolby.io/interactivity/docs/js-client-sdk-model-joinoptions
@@ -149,8 +149,8 @@ $("#connect-btn").click(() => {
             joinOptions.conferenceAccessToken = conferenceAccessToken;
           }
 
-          logMessage("Join the conference with the options:");
-          logMessage(JSON.stringify(joinOptions));
+          // logMessage("Join the conference with the options:");
+          // logMessage(JSON.stringify(joinOptions));
 
           // 2. Join the conference
           return VoxeetSDK.conference
@@ -434,6 +434,7 @@ function connectClick() {
       $("#external-id-input").attr("readonly", true);
       $("#username-input").attr("readonly", true);
       $("#avatar-url-input").attr("readonly", true);
+      $("#send-message-btn").attr("disabled", false);
     });
 }
 
@@ -1325,7 +1326,7 @@ $("#stop-rtmp-btn").click(async () => {
  */
 
 $("#send-message-btn").click(() => {
-  logMessage("VoxeetSDK.command.send()");
+  logMessage(`${$("#message-input").val()}`)
 
   VoxeetSDK.command
     .send($("#message-input").val())
@@ -1356,7 +1357,9 @@ $("#send-invitation-btn").click(() => {
 $(function () {
   // Initialize the Voxeet SDK
   VoxeetSDK.initialize(consumerKey, consumerSecret);
-  logMessage("The Voxeet SDK has been initialized");
+  logMessage("ClickStarting...");
+
+  $("#send-message-btn").attr("disabled", false);
 
   // Generate a random username
   let rand = Math.round(Math.random() * 10000);
