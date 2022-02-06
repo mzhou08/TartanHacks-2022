@@ -383,3 +383,10 @@ footer {
 .bg-primary {
   background-color:#26272b !important;
 }
+
+.left-padding{
+  padding-left: 72px;
+  padding-right: 72px;
+  padding-bottom: 50px;
+  padding-top: 0px;
+}
