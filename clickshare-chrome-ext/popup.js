@@ -64,12 +64,13 @@ function setClickerPos() {
       img.src = chrome.runtime.getURL("./click.png");
       Object.assign(img.style, {
           position: 'fixed',
-          width: '5vw',
-          height: '5vh',
+          width: "40px",
+          height: "40px",
           opacity: 50,
           objectFit: 'cover',
           objectPosition: 'center center',
-          pointerEvents: 'none'
+          pointerEvents: 'none',
+          "z-index": 100,
       });
       img.style.left = String(clickCoords[0]["x"]) + "px";
       img.style.top = String(clickCoords[0]["y"]) + "px";
