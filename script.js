@@ -76,15 +76,17 @@ const trackClick = (e) => {
       ".json",
     {
       method: "POST",
-      body: JSON.stringify([e.offsetX, e.offsetY]),
+      body: JSON.stringify([
+        (11 * e.offsetX * 100) / (11 * 1330),
+        (11 * e.offsetY * 100) / (11 * 830),
+      ]),
     }
   );
 };
 
-
 var input = document.getElementById("message-input");
 
-input.addEventListener("keyup", function(event) {
+input.addEventListener("keyup", function (event) {
   // Number 13 is the "Enter" key on the keyboard
   if (event.keyCode === 13) {
     // Cancel the default action, if needed
@@ -93,7 +95,6 @@ input.addEventListener("keyup", function(event) {
     document.getElementById("send-message-btn").click();
   }
 });
-
 
 $("#generate-conference-id").click(() => {
   // Generate a random conference alias
