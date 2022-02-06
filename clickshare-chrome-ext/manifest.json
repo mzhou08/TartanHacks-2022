@@ -5,10 +5,10 @@
     "manifest_version": 3,
     "action": {
         "default_popup": "popup.html",
-        "default_icon": "ClickShare.png"
+        "default_icon": "click.png"
     },
     "icons": {
-        "128": "Clickshare.png"
+        "128": "click.png"
     },
     "commands": {
         "_execute_action": {
