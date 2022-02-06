@@ -18,13 +18,13 @@ const logMessage = (message) => {
 };
 
 const logError = (message) => {
-  console.error(`${new Date().toISOString()} - ${message}`);
-  $("#logs-area").val(
-    (_, text) => `${text}${new Date().toISOString()} - ${message}\r\n`
-  );
+  // console.error(`${new Date().toISOString()} - ${message}`);
+  // $("#logs-area").val(
+    // (_, text) => `${text}${new Date().toISOString()} - ${message}\r\n`
+  // );
 
   // Scroll to the end
-  $("#logs-area").scrollTop($("#logs-area")[0].scrollHeight);
+  // $("#logs-area").scrollTop($("#logs-area")[0].scrollHeight);
 };
 
 var conferenceId;
@@ -150,8 +150,8 @@ $("#connect-btn").click(() => {
               joinOptions.conferenceAccessToken = conferenceAccessToken;
             }
 
-            logMessage("Join the conference with the options:");
-            logMessage(JSON.stringify(joinOptions));
+            // logMessage("Join the conference with the options:");
+            // logMessage(JSON.stringify(joinOptions));
 
             // 2. Join the conference
             return VoxeetSDK.conference
