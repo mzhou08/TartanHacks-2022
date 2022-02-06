@@ -23,11 +23,26 @@
         src="https://unpkg.com/@voxeet/voxeet-web-sdk"></script>
 </head>
 <body>
-
+    <img src = "ClickShare.png" width = "260px" height = "130px" style = "padding-top: 20px;">
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <!-- Masthead Avatar Image-->
+            <!-- Masthead Heading-->
+            <h7 class="masthead-heading text-uppercase mb-0" style = "color: white; position: relative; bottom: 140px;">Welcome</h7>
+            <o1 style="position: relative; bottom: 90px; color: white; font-size: 30px;">
+                <li style="text-align: left;">If you are looking to join a friends meeting, click join meeting and enter their <b>Meeting ID</b></li>
+                <li style="text-align: left;">To start a meeting, hit host meeting</li>
+                <li style="text-align: left;"> Make sure to download the chrome extension</li>
+            </o1>
+            <!-- Icon Divider-->
+    
+            <!-- Masthead Subheading-->
+            <p class="masthead-subheading font-weight-light mb-0"></p>
+        </div>
+    </header>
     
     <main role="main">
         <div class="container">
-            <img src = "ClickShare.png" width = "260px" height = "100px" style = "padding-top: 20px;">
             <h1 id="title" class="title"></h1>
             <div class="form-group row" style="position: relative; left: 320px;">
                 <label for="username-input" class="col-sm-3 col-form-label" style = "position: relative; left: 115px; font-family: monospace;">Name:</label>
@@ -76,6 +91,7 @@
   </form>
 </div>
 
+  <!-- Site footer -->
 <script>
 function openForm() {
   document.getElementById("myForm").style.display = "block";
@@ -305,14 +321,34 @@ function closeForm() {
         </div>
     </main>
 
-    <footer class="text-muted">
+    <footer class="site-footer">
         <div class="container">
-            <p class="float-right">
-                <a href="#" style ="display:none">Back to top</a>
-            </p>
-            
+          <div class="row">
+            <div class="col-sm-12 col-md-6" style = "padding-left: 50px;">
+              <h6 style="font-size: 25px;">About</h6>
+              <p class="text-justify" style = "font-size: 20px;">ClickShare is the easiest way to get in video contact with anyone. With no account system, all you have to do is click one button and you are in a meeting. On top of that, it an innovative extension allowing you to seamlessly point on another person's screenshare to direct them without being invasive.</p>
+            </div>
+    
+            <div class="col-xs-6 col-md-3" style="padding-left: 200px;">
+              <h6 style="font-size: 25px;">Links</h6>
+              <ul class="footer-links" style="font-size: 20px;">
+                <li><a href="https://github.com/mzhou08/TartanHacks-2022">GitHub</a></li>
+                <li><a href="https://www.youtube.com/">YouTube Overview</a></li>
+                <li><a href="https://www.tartanhacks.com/">TartanHacks</a></li>
+              </ul>
+            </div>
+          <hr>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-sm-6 col-xs-12">
+              <p class="copyright-text" style="padding-left: 20px;">EST. February 2022, 
+           <a href="#">ClickShare</a>.
+              </p>
+            </div>
         </div>
     </footer>
+    
 
     <script id="template-participant" type="text/x-jsrender">
         <li id="participant-{{:id}}">
