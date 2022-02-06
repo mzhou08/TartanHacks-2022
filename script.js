@@ -82,6 +82,20 @@ const trackClick = (e) => {
   );
 };
 
+
+var input = document.getElementById("message-input");
+
+input.addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("send-message-btn").click();
+  }
+});
+
+
 $("#generate-conference-id").click(() => {
   // Generate a random conference alias
   let conferenceAlias = Math.round(Math.random() * 10000);
