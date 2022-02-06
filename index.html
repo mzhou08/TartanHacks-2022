@@ -251,13 +251,15 @@ function closeForm() {
             </div>
 
             <!-- Messaging -->
-            <div class="form-group row" data-conference="on" style="display:none;">
+            <!-- style="display:none;" -->
+            
+            <div class="form-group row" data-conference="on">
                 <label for="message-input" class="col-sm-3 col-form-label">Message:</label>
                 <div class="col-sm-9">
                 <div class="input-group input-group-sm">
                     <input id="message-input" type="text" class="form-control" value="Bonjour">
                     <div class="input-group-append">
-                        <button id="send-message-btn" class="btn btn-primary" type="button" disabled>Send</button>
+                        <button id="send-message-btn" class="btn btn-primary" type="button">Send</button>
                     </div>
                   </div>
                 </div>
@@ -270,7 +272,8 @@ function closeForm() {
                 <div class="input-group input-group-sm">
                     <input id="invite-input" type="text" class="form-control" placeholder="External ID">
                     <div class="input-group-append">
-                        <button id="send-invitation-btn" class="btn btn-primary" type="button" disabled>Invite</button>
+                        
+                        <button id="send-invitation-btn" class="btn btn-primary" type="button" disabled>Invite</button> 
                     </div>
                   </div>
                 </div>
@@ -295,7 +298,8 @@ function closeForm() {
         </div>
 
         <!-- Display logs -->
-        <div class="bg-light" style = "display: none">
+        <!-- style = "display: none" -->
+        <div class="bg-light" >  
             <div class="container"
                 <h2 class="title">Logs</h2>
                 <div class="form-group">
