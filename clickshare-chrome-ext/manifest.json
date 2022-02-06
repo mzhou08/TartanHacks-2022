@@ -24,8 +24,11 @@
         "service_worker": "background.js"
     },
     "externally_connectable": {
+        "ids": ["*"],
         "matches": [
-            "*://clickshare.one/*"
+            "https://4d25-128-237-82-5.ngrok.io/*",
+            "https://localhost/",
+            "https://clickshare.one/*"
         ]
     },
     "permissions": ["storage", "activeTab", "scripting"]
