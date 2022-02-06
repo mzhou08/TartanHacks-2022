@@ -73,7 +73,7 @@ $("#btn-set-webrtc-constraints").click(() => {
 
 const trackClick = (e) => {
   console.log("x: " + e.offsetX + ", y:" + e.offsetY);
-  chrome.runtime.sendMessage('ping', response => {
+  chrome.runtime.sendMessage(ExtensionID, 'ping', response => {
     if(chrome.runtime.lastError) {
       setTimeout(ping, 1000);
     } else {
