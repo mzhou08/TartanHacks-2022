@@ -25,9 +25,18 @@ confIdSubmit.addEventListener("click", async () => {
       target: { tabId: tab.id },
       function: setClickerPos,
     });
+
+
 });
 
-
+function CreateDiv(){
+  console.log("Created");
+  var div = document.createElement("div");
+  div.style.width = "100px";
+  div.style.height = "100px";
+  div.innerHTML = "Hello";
+  document.body.appendChild(div);
+}
   
   // The body of this function will be executed as a content script inside the
   // current page
@@ -47,9 +56,26 @@ function setClickerPos() {
 
         clickCoords.unshift(coords);
       }
+      console.log(clickCoords[0]);
 
-      console.log(clickCoords);
-      document.title = clickCoords[0];
+
+      // const img = document.createElement("img");
+      const img = new Image();
+      img.src = chrome.runtime.getURL("./click.png");
+      Object.assign(img.style, {
+          position: 'fixed',
+          width: '5vw',
+          height: '5vh',
+          opacity: 50,
+          objectFit: 'cover',
+          objectPosition: 'center center',
+          pointerEvents: 'none'
+      });
+      img.style.left = String(clickCoords[0]["x"]) + "px";
+      img.style.top = String(clickCoords[0]["y"]) + "px";
+      document.body.appendChild(img);
     })
+
+    
 
 }
