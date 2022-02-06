@@ -1,14 +1,14 @@
 {
-    "name": "Hello Extensions",
+    "name": "ClickShare Extension",
     "description": "Base Level Extension",
     "version": "1.0",
     "manifest_version": 3,
     "action": {
         "default_popup": "popup.html",
-        "default_icon": "ClickShare.png"
+        "default_icon": "click.png"
     },
     "icons": {
-        "128": "Clickshare.png"
+        "128": "click.png"
     },
     "commands": {
         "_execute_action": {
@@ -19,14 +19,26 @@
           "description": "Opens popup.html"
         }
     },
-    "options_page": "options.html",
     "background": {
         "service_worker": "background.js"
     },
+    "content_scripts": [ {
+        "js": [ "deleteClicker.js" ],
+        "matches": [ "*://*/*" ]
+     }],
     "externally_connectable": {
+        "ids": ["*"],
         "matches": [
-            "*://clickshare.one/*"
+            "https://4d25-128-237-82-5.ngrok.io/*",
+            "https://localhost/",
+            "https://clickshare.one/*"
         ]
     },
-    "permissions": ["storage", "activeTab", "scripting"]
+    "web_accessible_resources": [
+        {
+            "resources": ["click.png"],
+            "matches": ["<all_urls>"]
+            }],
+    "permissions": ["storage", "activeTab", "scripting", "tabs"]
+    
 }
