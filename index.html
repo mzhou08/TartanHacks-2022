@@ -266,20 +266,7 @@ function closeForm() {
                 </div>
             </div>
 
-            <!-- Messaging -->
-            <!-- style="display:none;" -->
-            
-            <div class="form-group row" data-conference="on">
-                <label for="message-input" class="col-sm-3 col-form-label">Message:</label>
-                <div class="col-sm-9">
-                <div class="input-group input-group-sm">
-                    <input id="message-input" type="text" class="form-control" value="ClickSalutations!">
-                    <div class="input-group-append">
-                        <button id="send-message-btn" class="btn btn-primary" type="button">Send</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
+
 
             <!-- Invitation -->
             <div class="form-group row" data-conference="on" style="display:none;">
@@ -319,11 +306,29 @@ function closeForm() {
             <div class="container"
                 <h2 class="title">Logs</h2>
                 <div class="form-group">
-                    <textarea id="logs-area" class="form-control" rows="10" readonly></textarea>
+                    <textarea id="logs-area" class="form-control" rows="5" readonly></textarea>
                   </div>
             </div>
         </div>
+
+        <!-- Messaging -->
+            <!-- style="display:none;" -->
+            
+        <div class="form-group row" data-conference="on">
+            <!-- <label for="message-input" class="col-sm-3 col-form-label">Message:</label> -->
+            <div class="col-sm-9">
+            <div class="input-group input-group-sm">
+                <input id="message-input" type="text" class="form-control" value="ClickSalutations!">
+                <div class="input-group-append">
+                    <button id="send-message-btn" class="btn btn-primary" type="button">Send</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        
     </main>
+
+
 
     <footer class="site-footer">
         <div class="container">
