@@ -23,31 +23,25 @@
         src="https://unpkg.com/@voxeet/voxeet-web-sdk"></script>
 </head>
 <body>
-    <h1 id="intro">{ }</h1>
+    <h1 id="intro" class = "intro"></h1>
     <div id = "main">
-    <img src = "ClickShare.png" width = "450px" height = "120px" style = "padding-top: 30px;">
+    <img src = "ClickShare.png" width = "450px" height = "120px" style = "padding-top: 30px;" class = "center">
     <header class="masthead bg-primary text-white text-center">
-        <div class="container d-flex align-items-center flex-column">
-            <!-- Masthead Avatar Image-->
-            <!-- Masthead Heading-->
-            <h7 class="masthead-heading text-uppercase mb-0" style = "color: white; position: relative; bottom: 140px;">Welcome</h7>
+        <div class="container d-flex align-items-center flex-column" style = "padding: 0px;">
             <o1 style="position: relative; bottom: 90px; color: white; font-size: 30px;">
                 <li style="text-align: left;">If you are looking to join a friends meeting, click join meeting and enter their <b>Meeting ID</b></li>
                 <li style="text-align: left;">To start a meeting, hit host meeting</li>
                 <li style="text-align: left;"> Make sure to download the Chrome extension<a href = "https://github.com/mzhou08/TartanHacks-2022"> here</a> (Read the README)</li> 
             </o1>
-            <!-- Icon Divider-->
-    
-            <!-- Masthead Subheading-->
             <p class="masthead-subheading font-weight-light mb-0"></p>
         </div>
     </header>
     
     <main role="main">
         <div class="container">
-            <h1 id="title" class="title"></h1>
+            <h2 id="title" class="title" style = "color: black"></h2>
             <div class="form-group row" style="position: relative; left: 320px;">
-                <label for="username-input" class="col-sm-3 col-form-label name-label">Name:</label>
+                <label for="username-input" class="col-sm-3 col-form-label name-label" style = "color: black">Name:</label>
                 <div class="col-sm-2" style = "position: relative; right: 110px;">
                     <div class="input-group input-group-sm">
                         <input id="external-id-input" type="text" class="form-control" placeholder="External ID" title="External ID" style="display: none;">
@@ -141,8 +135,8 @@ function closeForm() {
                 <div class="col-sm-9">
                     <div class="input-group input-group-sm">
                         <div class="input-group-append">
-                            <button id="start-video-btn" class="btn btn-success" type="button" disabled>Start video</button>
-                            <button id="stop-video-btn" class="btn btn-secondary" type="button" disabled>Stop video</button>
+                            <button id="start-video-btn" class="btn btn-success" style = "font-size: 25px;" type="button" disabled>Start video</button>
+                            <button id="stop-video-btn" class="btn btn-secondary"  type="button" disabled>Stop video</button>
                         </div>
                     </div>
                 </div>
@@ -154,10 +148,10 @@ function closeForm() {
                 <div class="col-sm-9">
                     <div class="input-group input-group-sm">
                         <div class="input-group-append">
-                            <button id="start-audio-btn" class="btn btn-success" type="button" disabled>Start audio</button>
-                            <button id="stop-audio-btn" class="btn btn-secondary" type="button" disabled>Stop audio</button>
-                            <button id="mute-audio-btn" class="btn btn-warning" type="button" disabled>Mute audio</button>
-                            <button id="unmute-audio-btn" class="btn btn-warning" type="button" disabled>Unmute audio</button>
+                            <button id="start-audio-btn" class="btn btn-success" style = "font-size: 25px;" type="button" disabled>Start audio</button>
+                            <button id="stop-audio-btn" class="btn btn-secondary" style = "font-size: 25px;" type="button" disabled>Stop audio</button>
+                            <button id="mute-audio-btn" class="btn btn-warning" style = "font-size: 25px;" type="button" disabled>Mute audio</button>
+                            <button id="unmute-audio-btn" class="btn btn-warning" style = "font-size: 25px;" type="button" disabled>Unmute audio</button>
                         </div>
                     </div>
                 </div>
@@ -169,8 +163,8 @@ function closeForm() {
                 <div class="col-sm-9">
                     <div class="input-group input-group-sm">
                         <div class="input-group-append">
-                            <button id="start-screenshare-btn" class="btn btn-success" type="button" disabled>Start screen share</button>
-                            <button id="stop-screenshare-btn" class="btn btn-secondary" type="button" disabled>Stop screen share</button>
+                            <button id="start-screenshare-btn" style = "font-size: 25px;" class="btn btn-success" type="button" disabled>Start screen share</button>
+                            <button id="stop-screenshare-btn" style = "font-size: 25px;" class="btn btn-secondary" type="button" disabled>Stop screen share</button>
                         </div>
                     </div>
                 </div>
@@ -296,7 +290,7 @@ function closeForm() {
         <!-- Container for the video streams -->
         <div>
             <div class="container" >
-                <h2 id="video-streams" class="title" style="display:none">Video Streams</h2>
+                <h2 id="video-streams" class="title" style="display:none; color: black;">Video Streams</h2>
                 <div id="streams-containers" class="row"></div>
             </div>
         </div>
