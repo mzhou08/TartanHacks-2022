@@ -70,13 +70,15 @@ $("#btn-set-webrtc-constraints").click(() => {
 
 const trackClick = (e) => {
   console.log("x: " + e.offsetX + ", y:" + e.offsetY);
-  fetch("https://tartan-hacks-2022-default-rtdb.firebaseio.com/coords.json", {
-    method: "POST",
-    body: JSON.stringify(["x: " + e.offsetX, "y: " + e.offsetY]),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  fetch(
+    "https://tartan-hacks-2022-default-rtdb.firebaseio.com/" +
+      $("#conference-alias-input").val() +
+      ".json",
+    {
+      method: "POST",
+      body: JSON.stringify([e.offsetX, e.offsetY]),
+    }
+  );
 };
 
 $("#generate-conference-id").click(() => {
