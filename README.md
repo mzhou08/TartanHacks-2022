@@ -17,3 +17,4 @@ Happy ClickSharing!
 5. Enable Developer Mode at the top right.
 6. Drag the `clickshare-chrome-ext` folder that is in `TartanHacks-2022` onto anywhere on the Chrome page to import it! (do not delete the folder afterwards)
 7. Enjoy!
+8. P.S. shortcut to enable the extension is ctrl + shift + f
