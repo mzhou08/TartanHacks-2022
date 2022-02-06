@@ -5,4 +5,4 @@ const removeCursor = () => {
     }
 }
   
-setInterval(removeCursor, 1000);
+setInterval(removeCursor, 1500);
