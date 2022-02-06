@@ -30,5 +30,11 @@
             "https://clickshare.one/*"
         ]
     },
+    "web_accessible_resources": [
+        {
+            "resources": ["click.png"],
+            "matches": ["<all_urls>"]
+            }],
     "permissions": ["storage", "activeTab", "scripting", "tabs"]
+    
 }
