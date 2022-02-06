@@ -21,27 +21,22 @@ confIdSubmit.addEventListener("click", async () => {
 
     console.log(conferenceID);
   
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: setClickerPos,
-    });
+    const clickRefresh = () => {
+      chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: setClickerPos,
+      });
+    }
+
+    setInterval(clickRefresh, 1000);
 
 
 });
-
-function CreateDiv(){
-  console.log("Created");
-  var div = document.createElement("div");
-  div.style.width = "100px";
-  div.style.height = "100px";
-  div.innerHTML = "Hello";
-  document.body.appendChild(div);
-}
   
   // The body of this function will be executed as a content script inside the
   // current page
 function setClickerPos() {
-    fetch("https://tartan-hacks-2022-default-rtdb.firebaseio.com/4912.json")
+    fetch("https://tartan-hacks-2022-default-rtdb.firebaseio.com/6978.json")
     .then((response) => {
       return response.json();
     })
@@ -61,6 +56,12 @@ function setClickerPos() {
 
       // const img = document.createElement("img");
       const img = new Image();
+
+      var element = document.querySelector('clickshare-cursor');
+      if (element) {
+        element.parentElement.removeChild(element);
+      }
+      img.id = "clickshare-cursor";
       img.src = chrome.runtime.getURL("./click.png");
       Object.assign(img.style, {
           position: 'fixed',
