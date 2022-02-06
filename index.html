@@ -45,13 +45,12 @@
         <div class="container">
             <h1 id="title" class="title"></h1>
             <div class="form-group row" style="position: relative; left: 320px;">
-                <label for="username-input" class="col-sm-3 col-form-label" style = "position: relative; left: 115px; font-family: monospace;">Name:</label>
+                <label for="username-input" class="col-sm-3 col-form-label name-label">Name:</label>
                 <div class="col-sm-2" style = "position: relative; right: 110px;">
                     <div class="input-group input-group-sm">
                         <input id="external-id-input" type="text" class="form-control" placeholder="External ID" title="External ID" style="display: none;">
-                        <input id="username-input" type="text" class="form-control" placeholder="Your name" title="Your name">
+                        <input id="username-input" type="text" class="form-control" placeholder="Your name" title="Your name" style = "height: 50px; font-size: 150%;">
                         <input id="avatar-url-input" type="text" class="form-control" placeholder="Avatar URL" title="Avatar URL" style = "display: none;">
-                        
                     </div>
                 </div>
             </div>
@@ -316,9 +315,9 @@ function closeForm() {
             
         <div class="form-group row" data-conference="on">
             <!-- <label for="message-input" class="col-sm-3 col-form-label">Message:</label> -->
-            <div class="col-sm-9">
-            <div class="input-group input-group-sm">
-                <input id="message-input" type="text" class="form-control" value="ClickSalutations!">
+            <div class="col-sm-12">
+            <div class="input-group input-group-sm left-padding">
+                <input id="message-input" type="text" class="form-control" placeholder="send message">
                 <div class="input-group-append">
                     <button id="send-message-btn" class="btn btn-primary" type="button">Send</button>
                 </div>
