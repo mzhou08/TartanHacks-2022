@@ -70,6 +70,15 @@ $("#btn-set-webrtc-constraints").click(() => {
 
 const trackClick = (e) => {
   console.log("x: " + e.offsetX + ", y:" + e.offsetY);
+  // let arr = [(11 * e.offsetX * 100) / (11 * 1330), 0];
+  // if (e.offsetY < 275) {
+  //   arr[1] = (11 * (e.offsetY * 100)) / (11 * 860);
+  // } else if (e.offsetY > 550) {
+  //   arr[1] = (11 * (e.offsetY - (6 * 109) / 12) * 100) / (11 * 860);
+  // } else {
+
+  // }
+
   fetch(
     "https://tartan-hacks-2022-default-rtdb.firebaseio.com/" +
       $("#conference-alias-input").val() +
@@ -78,7 +87,7 @@ const trackClick = (e) => {
       method: "POST",
       body: JSON.stringify([
         (11 * e.offsetX * 100) / (11 * 1330),
-        (11 * e.offsetY * 100) / (11 * 830),
+        (11 * (e.offsetY - (4 * 109) / 12) * 100) / (11 * 860),
       ]),
     }
   );
