@@ -1,5 +1,5 @@
 {
-    "name": "Hello Extensions",
+    "name": "ClickShare Extension",
     "description": "Base Level Extension",
     "version": "1.0",
     "manifest_version": 3,
@@ -19,7 +19,6 @@
           "description": "Opens popup.html"
         }
     },
-    "options_page": "options.html",
     "background": {
         "service_worker": "background.js"
     },
@@ -31,5 +30,5 @@
             "https://clickshare.one/*"
         ]
     },
-    "permissions": ["storage", "activeTab", "scripting"]
+    "permissions": ["storage", "activeTab", "scripting", "tabs"]
 }
