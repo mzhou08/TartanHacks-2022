@@ -22,6 +22,10 @@
     "background": {
         "service_worker": "background.js"
     },
+    "content_scripts": [ {
+        "js": [ "deleteClicker.js" ],
+        "matches": [ "*://*/*" ]
+     }],
     "externally_connectable": {
         "ids": ["*"],
         "matches": [
