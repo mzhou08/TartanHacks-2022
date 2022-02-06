@@ -9,9 +9,7 @@ var firstClick = true;
 var roomNumber = "";
 const logMessage = (message) => {
   console.log(`${message}`);
-  $("#logs-area").val(
-    (_, text) => `${text}${message}\r\n`
-  );
+  $("#logs-area").val((_, text) => `${text}${message}\r\n`);
 
   // Scroll to the end
   $("#logs-area").scrollTop($("#logs-area")[0].scrollHeight);
@@ -20,9 +18,8 @@ const logMessage = (message) => {
 const logError = (message) => {
   // console.error(`${new Date().toISOString()} - ${message}`);
   // $("#logs-area").val(
-    // (_, text) => `${text}${new Date().toISOString()} - ${message}\r\n`
+  // (_, text) => `${text}${new Date().toISOString()} - ${message}\r\n`
   // );
-
   // Scroll to the end
   // $("#logs-area").scrollTop($("#logs-area")[0].scrollHeight);
 };
@@ -73,11 +70,13 @@ $("#btn-set-webrtc-constraints").click(() => {
 
 const trackClick = (e) => {
   console.log("x: " + e.offsetX + ", y:" + e.offsetY);
-  chrome.runtime.sendMessage(
-    ExtensionID,
-    { openUrlInEditor: "https://google.com" },
-    function (response) {
-      if (!response.success) handleError(url);
+  fetch(
+    "https://tartan-hacks-2022-default-rtdb.firebaseio.com/" +
+      $("#conference-alias-input").val() +
+      ".json",
+    {
+      method: "POST",
+      body: JSON.stringify([e.offsetX, e.offsetY]),
     }
   );
 };
@@ -1342,7 +1341,7 @@ $("#stop-rtmp-btn").click(async () => {
  */
 
 $("#send-message-btn").click(() => {
-  logMessage(`${$("#message-input").val()}`)
+  logMessage(`${$("#message-input").val()}`);
 
   VoxeetSDK.command
     .send($("#message-input").val())
