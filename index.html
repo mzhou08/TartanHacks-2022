@@ -23,6 +23,8 @@
         src="https://unpkg.com/@voxeet/voxeet-web-sdk"></script>
 </head>
 <body>
+    <h1 id="intro">{ }</h1>
+    <div id = "main">
     <img src = "ClickShare.png" width = "260px" height = "130px" style = "padding-top: 20px;">
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
@@ -357,7 +359,7 @@ function closeForm() {
         </div>
     </footer>
     
-
+    
     <script id="template-participant" type="text/x-jsrender">
         <li id="participant-{{:id}}">
             <img class="participant-avatar" src="{{:avatarUrl}}" />
@@ -414,5 +416,8 @@ function closeForm() {
         referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript" src="events.js"></script>
+
+    </div>
+    <script type="text/javascript" src="intro.js"></script>
 </body>
 </html>
