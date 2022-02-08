@@ -1,6 +1,9 @@
 # TartanHacks-2022
 Project for TartanHacks 2022
 
+## Note: ClickShare's code has moved.
+Please visit [Clickshare's organization](https://github.com/Click-Share/clickshare-website) for the most recent code.
+
 # Install the ClickShare Chrome Extension
 
 The Clickshare Chrome extension is a helper tool to enable synchronized clicks.
